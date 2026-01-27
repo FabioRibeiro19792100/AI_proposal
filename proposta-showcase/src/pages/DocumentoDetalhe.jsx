@@ -58,7 +58,7 @@ const documentosData = {
     arquivo: 'Proposta_2_Desafio_IA.md',
     tipo: 'Proposta comercial',
     categoria: 'Documentos Criados',
-    descricao: 'Proposta para Desafio de Inteligência Artificial com Fase 0 de construção do mote',
+    descricao: 'Construção colaborativa do conceito e desenho da proposta operacional para desafio de IA',
     status: 'Em revisão',
     conteudo: propostaIAContent
   }

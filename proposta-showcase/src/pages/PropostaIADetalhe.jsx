@@ -34,7 +34,7 @@ function PropostaIADetalhe() {
   })()
   
   const [hasSeenConcept, setHasSeenConcept] = useState(initialHasSeenConcept)
-  const [currentSlide, setCurrentSlide] = useState(initialHasSeenConcept ? 7 : 0) // Pula o conceito se já viu
+  const [currentSlide, setCurrentSlide] = useState(initialHasSeenConcept ? 8 : 0) // Pula o conceito se já viu
   const [typewriterText, setTypewriterText] = useState('') // Texto do efeito máquina de escrever
   const [isTyping, setIsTyping] = useState(false) // Controla se está digitando
   const [thesisTypewriterText, setThesisTypewriterText] = useState('') // Texto do efeito máquina de escrever na tese
@@ -45,8 +45,8 @@ function PropostaIADetalhe() {
 
   // Se skipConcept estiver na URL, pula direto para o conteúdo
   useEffect(() => {
-    if (skipConcept && currentSlide < 7) {
-      setCurrentSlide(7)
+    if (skipConcept && currentSlide < 8) {
+      setCurrentSlide(8)
       setHasSeenConcept(true)
       if (typeof window !== 'undefined') {
         localStorage.setItem('hasSeenConcept', 'true')
@@ -63,8 +63,8 @@ function PropostaIADetalhe() {
           e.preventDefault()
           
           // Se estiver no storytelling, libera o scroll primeiro
-          if (currentSlide < 7) {
-            setCurrentSlide(7)
+          if (currentSlide < 8) {
+            setCurrentSlide(8)
             setHasSeenConcept(true)
             if (typeof window !== 'undefined') {
               localStorage.setItem('hasSeenConcept', 'true')
@@ -111,9 +111,9 @@ function PropostaIADetalhe() {
       console.error('Erro ao adicionar listeners:', error)
     }
 
-    // Auto-libera scroll quando chegar no Hero (slide 6 - último)
+    // Auto-libera scroll quando chegar no Hero (slide 7 - último)
     let finalTimer = null
-    if (currentSlide === 6) {
+    if (currentSlide === 7) {
       finalTimer = setTimeout(() => {
         // Salva que já viu o conceito
         if (typeof window !== 'undefined') {
@@ -121,79 +121,39 @@ function PropostaIADetalhe() {
           setHasSeenConcept(true)
         }
         
-        // Muda para 7 para liberar scroll, mas o slide 6 permanece visível
-        setCurrentSlide(7)
-        
-        // Aguarda a mudança de posição e ajusta scroll suavemente
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            try {
-              const storytellingSection = document.querySelector('.storytelling-section')
-              if (storytellingSection) {
-                // Força o layout para calcular a posição correta
-                storytellingSection.offsetTop
-                
-                // Ajusta scroll suavemente após a mudança
-                setTimeout(() => {
-                  const sectionRect = storytellingSection.getBoundingClientRect()
-                  const sectionTop = sectionRect.top + window.scrollY
-                  
-                  if (sectionRect.top !== 0) {
-                    window.scrollTo({
-                      top: sectionTop,
-                      behavior: 'smooth'
-                    })
-                  }
-                }, 50)
-              }
-            } catch (error) {
-              console.error('Erro ao ajustar scroll:', error)
-            }
-          })
-        })
+        // Muda para 8 para liberar scroll, mas o slide 7 permanece visível
+        // Não faz scroll adicional para evitar o "quique" - mantém no topo (0,0)
+        setCurrentSlide(8)
       }, 2000)
     }
 
-    // Quando currentSlide = 7, libera o scroll mas mantém o slide 6 visível
+    // Quando currentSlide = 8, libera o scroll mas mantém o slide 7 visível
     // Não força scroll para evitar o "coice"
 
     // Bloquear scroll vertical durante storytelling horizontal
-    // Só adiciona listeners se estiver nos slides do storytelling (0-6)
-    if (currentSlide < 7) {
+    // Só adiciona listeners se estiver nos slides do storytelling (0-7)
+    if (currentSlide < 8) {
       try {
         const storytellingSection = document.querySelector('.storytelling-section')
         if (storytellingSection) {
           const handleWheel = (e) => {
             try {
-              if (currentSlide < 6) {
+              if (currentSlide < 7) {
                 e.preventDefault()
                 // Converter scroll vertical em navegação horizontal
                 if (e.deltaY > 0) {
-                  if (currentSlide === 5) {
-                    // Quando está no slide 5, faz fade out suave antes de ir para o topo
-                    const slide = document.querySelector('.storytelling-slide.active')
-                    if (slide) {
-                      slide.style.transition = 'opacity 0.8s ease-out'
-                      slide.style.opacity = '0'
-                    }
-                    setTimeout(() => {
-                      setCurrentSlide(7)
-                      setTimeout(() => {
-                        window.scrollTo({
-                          top: 0,
-                          behavior: 'smooth'
-                        })
-                      }, 100)
-                    }, 800)
+                  if (currentSlide === 6) {
+                    // Quando está no slide 6, vai para o Hero (slide 7)
+                    setCurrentSlide(7)
                   } else {
-                    setCurrentSlide(prev => Math.min(prev + 1, 6))
+                    setCurrentSlide(prev => Math.min(prev + 1, 7))
                   }
                 } else if (e.deltaY < 0) {
                   setCurrentSlide(prev => Math.max(prev - 1, 0))
                 }
               }
-              // No slide 6 (Hero - último), bloqueia scroll até timer liberar
-              else if (currentSlide === 6) {
+              // No slide 7 (Hero - último), bloqueia scroll até timer liberar
+              else if (currentSlide === 7) {
                 e.preventDefault()
               }
             } catch (error) {
@@ -286,9 +246,39 @@ function PropostaIADetalhe() {
     }
   }, [currentSlide])
 
-  // Efeito máquina de escrever no hero (slide 6)
+  // Scroll para o topo quando entra no Hero (slide 7)
   useEffect(() => {
-    if (currentSlide !== 6) {
+    if (currentSlide === 7) {
+      // Ancorar no topo (0,0) quando entra no Hero - instantâneo para evitar quique
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto'
+      })
+      
+      // Garante que permanece no topo quando muda para 8
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        })
+      }, 100)
+    }
+    
+    // Quando muda para 8, mantém no topo sem scroll suave
+    if (currentSlide === 8) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto'
+      })
+    }
+  }, [currentSlide])
+
+  // Efeito máquina de escrever no hero (slide 7)
+  useEffect(() => {
+    if (currentSlide !== 7) {
       setHeroTitleText('')
       setHeroSubtitleText('')
       setIsTypingHero(false)
@@ -395,10 +385,10 @@ function PropostaIADetalhe() {
   return (
     <div className="proposta-ia-page">
       {/* Storytelling Horizontal */}
-      <section className={`storytelling-section ${currentSlide < 7 ? 'locked' : 'unlocked'} ${currentSlide === 7 ? 'unlocking' : ''}`}>
+      <section className={`storytelling-section ${currentSlide < 8 ? 'locked' : 'unlocked'} ${currentSlide === 8 ? 'unlocking' : ''}`}>
         <div className="storytelling-container">
           {/* Setas de navegação elegantes */}
-          {currentSlide > 0 && currentSlide < 6 && (
+          {currentSlide > 0 && currentSlide < 7 && (
             <button 
               className="storytelling-arrow storytelling-arrow-left"
               onClick={() => setCurrentSlide(currentSlide - 1)}
@@ -409,26 +399,13 @@ function PropostaIADetalhe() {
               </svg>
             </button>
           )}
-          {currentSlide < 6 && (
+          {currentSlide < 7 && (
             <button 
               className="storytelling-arrow storytelling-arrow-right"
               onClick={() => {
-                if (currentSlide === 5) {
-                  // Quando está no slide 5, faz fade out suave antes de ir para o topo
-                  const slide = document.querySelector('.storytelling-slide.active')
-                  if (slide) {
-                    slide.style.transition = 'opacity 0.8s ease-out'
-                    slide.style.opacity = '0'
-                  }
-                  setTimeout(() => {
-                    setCurrentSlide(7)
-                    setTimeout(() => {
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                      })
-                    }, 100)
-                  }, 800)
+                if (currentSlide === 6) {
+                  // Quando está no slide 6, vai para o Hero (slide 7)
+                  setCurrentSlide(7)
                 } else {
                   setCurrentSlide(currentSlide + 1)
                 }
@@ -557,8 +534,59 @@ function PropostaIADetalhe() {
             </div>
           </div>
 
-          {/* Slide 6: Hero - permanece visível mesmo quando currentSlide = 7 */}
-          <div className={`storytelling-slide hero-slide ${currentSlide >= 6 ? 'active' : ''}`}>
+          {/* Slide 6: Contexto do conceito */}
+          <div className={`storytelling-slide ${currentSlide === 6 ? 'active' : ''}`}>
+            <div className="storytelling-content">
+              <div className="mote-contexto">
+                <h3 className="contexto-frame-title">O conceito em um frame</h3>
+                <div className="contexto-grid">
+                  <div className="contexto-item">
+                    <div className="contexto-header">
+                      <span className="contexto-numero">1</span>
+                      <span className="contexto-tag">origem</span>
+                      <strong className="contexto-titulo">Onde tudo começou</strong>
+                    </div>
+                    <p className="contexto-texto">Em 2005, a Globo se afirmava como um ponto de encontro do país. Um espaço onde o conteúdo conectava pessoas por meio de histórias, linguagens e experiências compartilhadas.</p>
+                  </div>
+                  <div className="contexto-item">
+                    <div className="contexto-header">
+                      <span className="contexto-numero">2</span>
+                      <span className="contexto-tag">deslocamento temporal</span>
+                      <strong className="contexto-titulo">O tempo passou</strong>
+                    </div>
+                    <p className="contexto-texto">Em 2025, esse encontro continua existindo. Mas o contexto mudou: as formas de criar, editar e distribuir conteúdo se transformaram.</p>
+                  </div>
+                  <div className="contexto-item">
+                    <div className="contexto-header">
+                      <span className="contexto-numero">3</span>
+                      <span className="contexto-tag">personagens</span>
+                      <strong className="contexto-titulo">Quem está em cena agora</strong>
+                    </div>
+                    <p className="contexto-texto">Hoje, o processo criativo envolve novos agentes. Pessoas, inteligências artificiais e sistemas que participam da criação, da mediação e da ampliação das narrativas.</p>
+                  </div>
+                  <div className="contexto-item">
+                    <div className="contexto-header">
+                      <span className="contexto-numero">4</span>
+                      <span className="contexto-tag">tese central</span>
+                      <strong className="contexto-titulo">O que não muda</strong>
+                    </div>
+                    <p className="contexto-texto">Mesmo com novas tecnologias, o centro permanece o mesmo. Conteúdo, narrativa e cultura seguem orientando as decisões criativas.</p>
+                  </div>
+                  <div className="contexto-item">
+                    <div className="contexto-header">
+                      <span className="contexto-numero">5</span>
+                      <span className="contexto-tag">convite / futuro</span>
+                      <strong className="contexto-titulo">Para onde estamos indo</strong>
+                    </div>
+                    <p className="contexto-texto">A chamada pública convida estudantes a explorar esse novo cenário, propondo ideias sobre como agentes humanos e artificiais podem criar juntos novas formas de conteúdo.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slide 7: Hero - permanece visível mesmo quando currentSlide = 8 */}
+          <div className={`storytelling-slide hero-slide ${currentSlide === 7 || currentSlide === 8 ? 'active' : ''}`}>
             <div className="storytelling-content">
               <div className="hero-content">
                 <h1 className="hero-title" style={{ marginBottom: '2rem' }}>
@@ -635,9 +663,9 @@ function PropostaIADetalhe() {
           </div>
 
           {/* Indicadores de navegação (bolinhas) */}
-          {currentSlide < 6 && (
+          {currentSlide < 7 && (
             <div className="storytelling-indicators">
-              {[0, 1, 2, 3, 4, 5, 6].map((index) => (
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
                 <button
                   key={index}
                   className={`storytelling-indicator ${currentSlide === index ? 'active' : ''}`}
@@ -827,7 +855,7 @@ function PropostaIADetalhe() {
             </div>
 
             <div className="journey-step">
-              <h3 className="journey-title">2. Criamos o Mote: "Agentes se veem por aqui"</h3>
+              <h3 className="journey-title">2. Criamos o Conceito do Desafio: "Agentes se veem por aqui"</h3>
               <p className="journey-description">
                 Em 2005, a Globo lançou uma campanha institucional marcante: "A gente se vê por aqui". Era a era da TV linear, uma forma, uma tela, um ponto de encontro.
               </p>
@@ -854,7 +882,7 @@ function PropostaIADetalhe() {
             <div className="journey-step">
               <h3 className="journey-title">3. Discutimos hipóteses "mais sofisticadas" de desafio</h3>
               <p className="journey-description">
-                Com o mote definido, começamos a imaginar o desafio em si. Testamos ideias sofisticadas:
+                Com o conceito do desafio definido, começamos a imaginar o desafio em si. Testamos ideias sofisticadas:
               </p>
               <ul className="journey-sublist">
                 <li>E se a própria IA avaliasse as submissões automaticamente usando critérios da Globo?</li>
@@ -1210,7 +1238,7 @@ function PropostaIADetalhe() {
             <div className="section-number">03</div>
             <h2 className="section-title">Entregável #2: Proposta operacional do desafio</h2>
             <p className="section-description">
-              Nossa recomendação fundamentada: começar pela Fase 0 de construção do mote, seguida de mecânica híbrida em 2 fases.
+              Nossa recomendação fundamentada: começar pela Fase 0 de construção do conceito do desafio, seguida de mecânica híbrida em 2 fases.
             </p>
           </div>
 
@@ -1219,12 +1247,12 @@ function PropostaIADetalhe() {
               <div className="phase-header">
                 <div>
                   <span className="phase-number">0</span>
-                  <h3 className="phase-title">Construção do Mote</h3>
+                  <h3 className="phase-title">Construção do Conceito do Desafio</h3>
                 </div>
                 <div className="phase-duration">2 semanas</div>
               </div>
               <p className="phase-description">
-                Trabalho colaborativo para definir mote, recorte temático, mecânica detalhada e diretrizes de comunicação.<br />Esta fase é obrigatória e garante alinhamento estratégico antes da execução.
+                Trabalho colaborativo para definir conceito do desafio, recorte temático, mecânica detalhada e diretrizes de comunicação.<br />Esta fase é obrigatória e garante alinhamento estratégico antes da execução.
               </p>
               <div className="phase-deliverables">
                 <h4>Entregas Principais:</h4>
@@ -1370,9 +1398,9 @@ function PropostaIADetalhe() {
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>0. Construção do Mote</strong></td>
+                  <td><strong>0. Construção do Conceito do Desafio</strong></td>
                   <td>2 semanas</td>
-                  <td>Definir mote, recorte temático, mecânica e diretrizes</td>
+                  <td>Definir conceito do desafio, recorte temático, mecânica e diretrizes</td>
                   <td>Framework de avaliação, diretrizes, documento aprovado</td>
                 </tr>
                 <tr>

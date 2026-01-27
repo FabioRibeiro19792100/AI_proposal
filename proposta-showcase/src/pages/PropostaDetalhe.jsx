@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { propostaPPAContent, propostaIAContent } from '../data/documentos'
 import '../styles/PropostaDetalhe.css'
 
@@ -15,7 +15,7 @@ const propostasData = {
   8: {
     id: 8,
     titulo: 'Proposta 2 - Desafio IA',
-    descricao: 'Proposta para Desafio de Inteligência Artificial com Fase 0 de construção do mote',
+    descricao: 'Construção colaborativa do conceito e desenho da proposta operacional para desafio de IA',
     categoria: 'Tecnologia',
     conteudo: propostaIAContent
   }
@@ -722,13 +722,14 @@ function renderInvestmentSection(content) {
           '10 campanhas aprimoradas e documentadas',
           'Roteiros revisados e otimizados',
           'Equipes preparadas para o pitch'
-        ]
+        ],
+        duvida: true
       },
       {
         titulo: 'Fase 5 - Imersão',
         valor: 'R$ 65.000,00',
         entregaveis: [
-          '3 videocases finalizados',
+          '3 propostas criativas finalizadas',
           'Documentação completa do processo',
           'Relatório final com métricas'
         ]
@@ -760,7 +761,7 @@ function renderInvestmentSection(content) {
           <p>
             O investimento garante a entrega completa do desafio: desde a descoberta e seleção 
             de talentos em todo o Brasil, passando por um processo formativo exclusivo que 
-            aprimora as campanhas das equipes, até a produção final de 3 videocases prontos 
+            aprimora as campanhas das equipes, até a produção final de 3 propostas criativas prontas 
             para o júri PPA.
           </p>
           <p>
@@ -781,7 +782,14 @@ function renderInvestmentSection(content) {
           <div key={index} className="detalhamento-item">
             <div className="detalhamento-header">
               <div>
-                <h4 className="detalhamento-titulo">{item.titulo}</h4>
+                <h4 className="detalhamento-titulo">
+                  {item.titulo}
+                  {item.duvida && (
+                    <span className="duvida-tag" title="Responsabilidade a confirmar">
+                      Dúvida
+                    </span>
+                  )}
+                </h4>
                 {item.titulo === 'Fases 1, 2 e 4' && (
                   <p className="detalhamento-nota">
                     <strong>(Mesma referência usada na Academia LED onde trabalhamos essas 3 fases)</strong>
@@ -924,6 +932,15 @@ function PropostaDetalhe() {
   const { id } = useParams()
   const proposta = propostasData[id]
   const [openSections, setOpenSections] = useState({})
+
+  // Ancorar no topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    })
+  }, [id])
 
   if (!proposta) {
     return (

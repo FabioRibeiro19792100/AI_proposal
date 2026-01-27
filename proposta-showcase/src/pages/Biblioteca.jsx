@@ -51,19 +51,23 @@ function Biblioteca() {
             <section key={categoria} className="biblioteca-section">
               <h2 className="section-label">{categoria}</h2>
               <div className="cards-grid">
-                {docsCategoria.map((doc, index) => (
-                  <Link
-                    key={doc.id}
-                    to={`/briefings/${doc.id}`}
-                    className="documento-card"
-                  >
-                    <span className="card-number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <h3 className="card-titulo">{doc.titulo}</h3>
-                    <p className="card-descricao">{doc.descricao}</p>
-                  </Link>
-                ))}
+                {docsCategoria.map((doc, index) => {
+                  // Numeração independente para cada categoria (começa do 01 em cada seção)
+                  const numero = index + 1
+                  return (
+                    <Link
+                      key={doc.id}
+                      to={`/briefings/${doc.id}`}
+                      className="documento-card"
+                    >
+                      <span className="card-number">
+                        {String(numero).padStart(2, '0')}
+                      </span>
+                      <h3 className="card-titulo">{doc.titulo}</h3>
+                      <p className="card-descricao">{doc.descricao}</p>
+                    </Link>
+                  )
+                })}
               </div>
             </section>
           )

@@ -11,7 +11,7 @@ const propostas = [
   {
     id: 8,
     titulo: 'Desafio IA',
-    descricao: 'Desafio de Inteligência Artificial com Fase 0 de construção do mote',
+    descricao: 'Construção colaborativa do conceito e desenho da proposta operacional para desafio de IA',
     status: 'Em revisão'
   }
 ]

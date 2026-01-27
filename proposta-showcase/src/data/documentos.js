@@ -10,7 +10,7 @@ export const premissasContent = `# Premissas do Desafio Globo IA
 **Demandante:** Globo  
 **Objetivo:** Montar proposta de desafio sobre IA para estudantes de ensino superior do Brasil  
 **Foco:** Aplicação de IA para produção e distribuição de conteúdo  
-**Missão:** Esquematizar desde a chamada, tema, gancho e mote para conceber o desafio
+**Missão:** Esquematizar desde a chamada, tema, gancho e conceito do desafio para conceber o desafio
 
 ---
 
@@ -875,7 +875,7 @@ Edital nacional para equipes de até 03 estudantes de publicidade + professor me
 Enviar uma proposta criativa para uma campanha no tema do edital. A Globo irá desenvolver a campanha.  
 A inscrição deve conter:
 
-- videocase criativo defesa  
+- Material criativo de defesa  
 - Roteiro criativo de uma peça de 30 segundos  
 - Roteiro de uma ação integrada  
 - indicar um professor  
@@ -890,13 +890,13 @@ As 10 equipes participam de uma mentoria online e exclusiva com a Master para ap
 As equipes defendem suas propostas de campanha para uma banca Globo. Ao final, serão escolhidas 03 equipes para aprimorar o planejamento + imersão.
 
 ### 6. Encontros + Imersão
-As equipes selecionadas participam de uma 04 encontros prévios e online para detalhar todo o processo e seguem para imersão na Globo SP para finalizar o videocase.
+As equipes selecionadas participam de uma 04 encontros prévios e online para detalhar todo o processo e seguem para imersão na Globo SP para finalizar a proposta criativa.
 
 ### 7. Avaliação do Júri
-Os 03 videocases produzidos durante a imersão são encaminhados e avaliados pelo júri do PPA. A ideia escolhida é desenvolvida pela Globo.
+As 03 propostas criativas produzidas durante a imersão são encaminhadas e avaliadas pelo júri do PPA. A ideia escolhida é desenvolvida pela Globo.
 
 ### 8. Desenvolvimento
-O videocase vencedor será anunciado no PPA. A campanha proposta nele será desenvolvida pela Globo e veiculada.
+A proposta criativa vencedora será anunciada no PPA. A campanha proposta nela será desenvolvida pela Globo e veiculada.
 
 ---
 
@@ -1042,7 +1042,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Seleção e divulgação das 10 equipes finalistas
 
 **Critérios de Avaliação:**
-- Qualidade criativa do videocase
+- Qualidade criativa da proposta
 - Relevância e viabilidade dos roteiros
 - Potencial de impacto da campanha proposta
 - Alinhamento com o tema do edital
@@ -1124,9 +1124,9 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 **Imersão Presencial (2 semanas):**
 - Coordenação logística da imersão na Globo SP
 - Facilitação dos encontros presenciais
-- Acompanhamento do desenvolvimento dos videocases
+- Acompanhamento do desenvolvimento das propostas criativas
 - Suporte técnico e criativo às equipes
-- Finalização dos 3 videocases para avaliação do júri PPA
+- Finalização das 3 propostas criativas para avaliação do júri PPA
 
 **Estrutura da Imersão:**
 
@@ -1134,11 +1134,11 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 |-----------|---------|
 | Acolhimento e briefing | 1 dia |
 | Desenvolvimento criativo | 5 dias |
-| Produção dos videocases | 5 dias |
+| Produção das propostas criativas | 5 dias |
 | Finalização e entrega | 2 dias |
 
 **Entregáveis:**
-- 3 videocases finalizados e prontos para avaliação do júri PPA
+- 3 propostas criativas finalizadas e prontas para avaliação do júri PPA
 - Documentação completa do processo de imersão
 - Relatório final com métricas e aprendizados
 
@@ -1152,7 +1152,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 | **Fase 2: Seleção Inicial** | 3 semanas | Maio 2026 | 10 equipes selecionadas |
 | **Fase 3: Mentoria** | 4 semanas | Maio-Junho 2026 | Campanhas aprimoradas |
 | **Fase 4: Pitch** | 2 semanas | Junho 2026 | 3 equipes finalistas |
-| **Fase 5: Encontros + Imersão** | 6 semanas | Julho-Setembro 2026 | 3 videocases finalizados |
+| **Fase 5: Encontros + Imersão** | 6 semanas | Julho-Setembro 2026 | 3 propostas criativas finalizadas |
 | **Total** | **21 semanas** | **Abril a Setembro 2026** | — |
 
 **Observação:** O cronograma está alinhado ao "Tempos & Movimentos" do briefing PPA, considerando que a avaliação do júri (ponto 7) ocorre em outubro e a exibição no PPA (ponto 8) em novembro.
@@ -1164,7 +1164,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 ### Plataforma de Inscrições
 
 - Sistema web responsivo e acessível
-- Formulário de inscrição com upload de arquivos (videocase, roteiros)
+- Formulário de inscrição com upload de arquivos (material criativo, roteiros)
 - Área do participante para acompanhamento do processo
 - Painel administrativo para gestão completa
 - Sistema de notificações automáticas
@@ -1211,7 +1211,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Equipes preparadas para o pitch
 
 **Fase 5 - Imersão (R$ 65.000,00):**
-- 3 videocases finalizados
+- 3 propostas criativas finalizadas
 - Documentação completa do processo
 - Relatório final com métricas
 
@@ -1227,7 +1227,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - **30%** na assinatura do contrato (início Fase 1)
 - **30%** no início da Fase 3 (Mentoria)
 - **25%** no início da Fase 5 (Encontros + Imersão)
-- **15%** na entrega final (3 videocases finalizados)
+- **15%** na entrega final (3 propostas criativas finalizadas)
 
 ### Observações
 
@@ -1288,7 +1288,7 @@ export const propostaIAContent = `# Proposta Comercial
 
 ## 1. Contexto e Objetivo
 
-A Globo busca desenvolver um desafio sobre Inteligência Artificial para estudantes de ensino superior do Brasil, com foco na aplicação de IA para produção e distribuição de conteúdo. Esta proposta reconhece que o mote, tema e gancho do desafio ainda não estão definidos, e que sua construção é parte fundamental do trabalho proposto.
+A Globo busca desenvolver um desafio sobre Inteligência Artificial para estudantes de ensino superior do Brasil, com foco na aplicação de IA para produção e distribuição de conteúdo. Esta proposta reconhece que o conceito do desafio, tema e gancho ainda não estão definidos, e que sua construção é parte fundamental do trabalho proposto.
 
 ### 1.1 Objetivo do Trabalho
 Desenvolver e executar um desafio de IA que:
@@ -1299,7 +1299,7 @@ Desenvolver e executar um desafio de IA que:
 - Descobre e conecta talentos reais
 
 ### 1.2 Premissas Fundamentais
-- **O mote do desafio ainda não está definido** - sua construção é parte do escopo
+- **O conceito do desafio ainda não está definido** - sua construção é parte do escopo
 - Existe cuidado estratégico com exposição de marca e abordagens superficiais
 - O desafio deve diferenciar claramente talentos humanos de talentos artificiais
 - A IA deve ser posicionada como assistente, não substituto
@@ -1314,9 +1314,9 @@ Desenvolver e executar um desafio de IA que:
 
 ---
 
-## 2. Fase 0: Construção do Mote e Desenho do Desafio
+## 2. Fase 0: Construção do Conceito do Desafio e Desenho do Desafio
 
-Esta fase é **obrigatória e parte do escopo**, dedicada à construção colaborativa do mote, definição de recorte temático, desenho da mecânica e alinhamento editorial e de marca.
+Esta fase é **obrigatória e parte do escopo**, dedicada à construção colaborativa do conceito do desafio, definição de recorte temático, desenho da mecânica e alinhamento editorial e de marca.
 
 ### 2.1 Objetivo da Fase 0
 Construir, em conjunto com a Globo, os fundamentos do desafio através de um processo estruturado de reflexão orientada, não como uma definição fechada prévia.
@@ -1330,7 +1330,7 @@ Construir, em conjunto com a Globo, os fundamentos do desafio através de um pro
 - Análise de referências (framework Netflix, casos internacionais)
 
 #### 2.2.2 Construção de Hipóteses (2 semanas)
-- Desenvolvimento de múltiplas hipóteses de mote e tema
+- Desenvolvimento de múltiplas hipóteses de conceito do desafio e tema
 - Exploração de diferentes níveis de abertura
 - Análise de prós e contras de cada abordagem
 - Workshop colaborativo com equipe Globo
@@ -1355,7 +1355,7 @@ Construir, em conjunto com a Globo, os fundamentos do desafio através de um pro
 
 ### 2.3 Entregável Final da Fase 0
 **Documento de Definição do Desafio**, contendo:
-- Mote e tema definidos
+- Conceito do desafio e tema definidos
 - Recorte temático aprovado
 - Mecânica detalhada e validada
 - Framework de avaliação
@@ -1480,7 +1480,7 @@ Esta seção apresenta as **perguntas estratégicas, hipóteses de abordagem, te
 
 ### 5.1 Mastertech
 
-**Fase 0 - Construção do Mote:**
+**Fase 0 - Construção do Conceito do Desafio:**
 - Facilitação do processo de construção colaborativa
 - Análise e síntese de informações
 - Desenvolvimento de hipóteses e recomendações
@@ -1507,7 +1507,7 @@ Esta seção apresenta as **perguntas estratégicas, hipóteses de abordagem, te
 - Participação ativa nos workshops
 - Definição de objetivos estratégicos
 - Validação de hipóteses e recomendações
-- Aprovação de mote, recorte e mecânica
+- Aprovação do conceito do desafio, recorte e mecânica
 
 **Fase 1:**
 - Definição de categorias (se aplicável)
@@ -1564,7 +1564,7 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 
 | Fase | Duração | Início | Término |
 |------|---------|--------|---------|
-| **Fase 0: Construção do Mote** | 9 semanas | T+0 | T+9 |
+| **Fase 0: Construção do Conceito do Desafio** | 9 semanas | T+0 | T+9 |
 | **Fase 1: Submissão** | 6 semanas | T+9 | T+15 |
 | **Fase 2: Prototipação** | 8 semanas | T+15 | T+23 |
 | **Fase 3: Implementação (Opcional)** | 12 semanas | T+23 | T+35 |
@@ -1675,7 +1675,7 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 
 ### 11.1 Estrutura de Custos
 
-**Fase 0 - Construção do Mote:**
+**Fase 0 - Construção do Conceito do Desafio:**
 - Facilitação e workshops: R$ 60.000 - R$ 80.000
 - Análise e pesquisa: R$ 40.000 - R$ 60.000
 - Prototipação de abordagens: R$ 30.000 - R$ 40.000
@@ -1769,7 +1769,7 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 
 ### 14.2 Kick-off Fase 0
 - Reunião de alinhamento inicial
-- Apresentação do processo de construção do mote
+- Apresentação do processo de construção do conceito do desafio
 - Definição de cronograma detalhado
 - Início dos workshops colaborativos
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import '../styles/PropostaPPAResumo.css'
 
 const fases = [
@@ -42,7 +43,8 @@ const fases = [
       'Aprofundamento de campanhas',
       'Preparação para pitch'
     ],
-    entregavel: '10 campanhas aprimoradas e documentadas, roteiros revisados e otimizados, equipes preparadas para o pitch'
+    entregavel: '10 campanhas aprimoradas e documentadas, roteiros revisados e otimizados, equipes preparadas para o pitch',
+    duvida: true
   },
   {
     numero: '04',
@@ -67,10 +69,10 @@ const fases = [
     atividades: [
       '4 encontros online prévios',
       'Imersão presencial 2 semanas',
-      'Desenvolvimento de videocases',
+      'Desenvolvimento de propostas criativas',
       'Finalização e entrega'
     ],
-    entregavel: '3 videocases finalizados prontos para avaliação do júri PPA, documentação completa do processo de imersão e relatório final com métricas e aprendizados'
+    entregavel: '3 propostas criativas finalizadas prontas para avaliação do júri PPA, documentação completa do processo de imersão e relatório final com métricas e aprendizados'
   }
 ]
 
@@ -94,13 +96,14 @@ const investimento = {
         '10 campanhas aprimoradas e documentadas',
         'Roteiros revisados e otimizados',
         'Equipes preparadas para o pitch'
-      ]
+      ],
+      duvida: true
     },
     {
       titulo: 'Fase 5 - Imersão',
       valor: 'R$ 65.000,00',
       entregaveis: [
-        '3 videocases finalizados',
+        '3 propostas criativas finalizadas',
         'Documentação completa do processo',
         'Relatório final com métricas'
       ]
@@ -158,6 +161,15 @@ const diferenciais = [
 ]
 
 function PropostaPPAResumo() {
+  // Ancorar no topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    })
+  }, [])
+
   return (
     <div className="proposta-ppa-resumo">
       <div className="proposta-header-sticky">
@@ -206,7 +218,14 @@ function PropostaPPAResumo() {
                   <span className="fase-periodo">{fase.periodo}</span>
                 </div>
               </div>
-              <h3 className="fase-titulo">{fase.titulo}</h3>
+              <h3 className="fase-titulo">
+                {fase.titulo}
+                {fase.duvida && (
+                  <span className="duvida-tag" title="Responsabilidade a confirmar">
+                    Dúvida
+                  </span>
+                )}
+              </h3>
               <p className="fase-descricao">{fase.descricao}</p>
               <div className="fase-atividades">
                 <h4>Atividades:</h4>
@@ -262,7 +281,7 @@ function PropostaPPAResumo() {
             <p>
               O investimento garante a entrega completa do desafio: desde a descoberta e seleção 
               de talentos em todo o Brasil, passando por um processo formativo exclusivo que 
-              aprimora as campanhas das equipes, até a produção final de 3 videocases prontos 
+              aprimora as campanhas das equipes, até a produção final de 3 propostas criativas prontas 
               para o júri PPA.
             </p>
             <p>
@@ -283,7 +302,14 @@ function PropostaPPAResumo() {
             <div key={index} className="detalhamento-item">
               <div className="detalhamento-header">
                 <div>
-                  <h4 className="detalhamento-titulo">{item.titulo}</h4>
+                  <h4 className="detalhamento-titulo">
+                    {item.titulo}
+                    {item.duvida && (
+                      <span className="duvida-tag" title="Responsabilidade a confirmar">
+                        Dúvida
+                      </span>
+                    )}
+                  </h4>
                   {item.titulo === 'Fases 1, 2 e 4' && (
                     <p className="detalhamento-nota">
                       <strong>(Mesma referência usada na Academia LED onde trabalhamos essas 3 fases)</strong>
