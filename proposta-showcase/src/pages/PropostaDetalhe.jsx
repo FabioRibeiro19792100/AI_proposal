@@ -785,7 +785,7 @@ function renderInvestmentSection(content) {
                 <h4 className="detalhamento-titulo">
                   {item.titulo}
                   {item.duvida && (
-                    <span className="duvida-tag" title="Responsabilidade a confirmar">
+                    <span className="duvida-tag" title="Responsabilidade a confirmar (Mastertech ou Globo)">
                       Dúvida
                     </span>
                   )}

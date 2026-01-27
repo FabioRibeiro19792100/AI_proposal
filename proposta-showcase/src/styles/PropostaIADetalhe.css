@@ -1969,13 +1969,18 @@
 
   .nav-links {
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .nav-link {
-    font-size: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .nav-brand {
+    font-size: 0.875rem;
+    line-height: 1.3;
   }
 
   .section {
@@ -1993,6 +1998,11 @@
 
   .storytelling-content {
     padding: 0 2rem;
+  }
+
+  .mote-contexto {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 
   .storytelling-arrow {

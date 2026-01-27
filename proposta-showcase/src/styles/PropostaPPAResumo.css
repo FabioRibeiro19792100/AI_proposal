@@ -711,6 +711,46 @@
   .pagamento-steps {
     grid-template-columns: 1fr;
   }
+
+  .proposta-header-sticky {
+    padding: 1rem 0;
+    flex-wrap: wrap;
+  }
+
+  .view-mode-switcher {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .view-mode-switch {
+    font-size: 0.8125rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .duvida-tag {
+    font-size: 0.625rem;
+    padding: 0.2rem 0.4rem;
+    margin-left: 0.25rem;
+  }
+
+  .duvida-tag::after {
+    font-size: 0.6875rem;
+    padding: 0.4rem 0.6rem;
+    white-space: normal;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .fase-titulo {
+    font-size: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .detalhamento-titulo {
+    font-size: 1.125rem;
+    flex-wrap: wrap;
+  }
 }
 
 /* Botão de impressão */
