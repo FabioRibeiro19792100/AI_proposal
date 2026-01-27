@@ -5,11 +5,11 @@
 .biblioteca-container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 4rem 15.68rem;
+  padding: 2rem 15.68rem 4rem 15.68rem;
 }
 
 .biblioteca-header {
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 .biblioteca-label {
@@ -31,7 +31,7 @@
 }
 
 .biblioteca-section {
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
 }
 
 .biblioteca-section:last-child {
@@ -43,13 +43,13 @@
   font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4rem 2rem;
+  gap: 4rem 6rem;
 }
 
 .documento-card {

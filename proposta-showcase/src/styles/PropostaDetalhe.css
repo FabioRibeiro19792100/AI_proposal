@@ -112,6 +112,13 @@
   color: #333333;
 }
 
+/* Sublinhado distante para fases */
+.proposta-conteudo h3.fase-title {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-thickness: 1px;
+}
+
 .proposta-conteudo h4 {
   font-size: 1.125rem;
   font-weight: 500;
@@ -123,12 +130,36 @@
 
 .proposta-conteudo ul {
   margin: 1.5rem 0;
-  padding-left: 2rem;
-  list-style-type: disc;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .proposta-conteudo li {
   margin-bottom: 0.75rem;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+/* Listas de Atividades da Mastertech - setas vermelhas */
+.proposta-conteudo ul.mastertech-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #ff0000;
+  font-weight: 300;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* Demais listas - travessões pretos */
+.proposta-conteudo ul:not(.mastertech-list) li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #000000;
+  font-weight: 400;
+  font-size: 1em;
   line-height: 1.6;
 }
 
@@ -200,10 +231,39 @@
   background: #f5f5f5;
 }
 
-/* Tabela de timeline - layout vertical */
+/* Linhas de grupo destacadas (Operação, Comunicação, etc) */
+/* Estilos de grupo APENAS para tabela de investimento */
+.proposta-table.investment-table tbody tr.table-group-row {
+  background: #f5f5f5 !important;
+}
+
+.proposta-table.investment-table tbody tr.table-group-row td {
+  background: #f5f5f5 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 1.125rem !important;
+  padding: 0.75rem 1.5rem !important;
+  border-top: 2px solid #000000 !important;
+  border-bottom: 2px solid #000000 !important;
+  border-right: none !important;
+}
+
+.proposta-table.investment-table tbody tr.table-group-row td strong {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Esconde células vazias em linhas de grupo APENAS na tabela de investimento */
+.proposta-table.investment-table tbody tr.table-group-row td:empty {
+  display: none !important;
+}
+
+/* Tabela de timeline - layout vertical com colunas de tamanho igual */
 .proposta-table.timeline-table {
   display: block;
   border: 2px solid #000000;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .proposta-table.timeline-table thead {
@@ -219,11 +279,10 @@
   display: table-cell;
   padding: 1.25rem 1.5rem;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  width: 30%;
+  width: 25%;
 }
 
 .proposta-table.timeline-table thead th:last-child {
-  width: 70%;
   border-right: none;
 }
 
@@ -246,17 +305,110 @@
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   vertical-align: top;
+  width: 25%;
 }
 
 .proposta-table.timeline-table tbody td:first-child {
   font-weight: 500;
-  width: 30%;
   border-right: 2px solid #000000;
 }
 
 .proposta-table.timeline-table tbody td:last-child {
-  width: 70%;
   border-right: none;
+}
+
+/* Tabela de mentoria - colunas de tamanho igual (4 colunas) */
+.proposta-table.mentoria-table {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.proposta-table.mentoria-table thead tr,
+.proposta-table.mentoria-table tbody tr {
+  display: table-row;
+}
+
+.proposta-table.mentoria-table th,
+.proposta-table.mentoria-table td {
+  width: 25% !important;
+  max-width: 25% !important;
+  min-width: 25% !important;
+  padding: 1.122rem 1.8rem !important;
+  font-size: 1.08rem !important;
+  box-sizing: border-box;
+}
+
+/* Esconde qualquer coluna além da 4ª e remove espaços extras */
+.proposta-table.mentoria-table th:nth-child(n+5),
+.proposta-table.mentoria-table td:nth-child(n+5),
+.proposta-table.mentoria-table th:empty,
+.proposta-table.mentoria-table td:empty {
+  display: none !important;
+  width: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+}
+
+/* Garante que não há espaço extra na tabela */
+.proposta-table.mentoria-table {
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
+}
+
+/* Timeline de Estrutura da Imersão (similar a Tempos e Movimentos) */
+.imersao-cards-grid {
+  margin: 3rem 0;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.imersao-cards-grid::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #000000;
+}
+
+.imersao-card {
+  position: relative;
+  padding: 1.5rem 0 1.5rem 2rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.imersao-card:last-child {
+  border-bottom: none;
+}
+
+.imersao-card::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 2rem;
+  width: 12px;
+  height: 12px;
+  background: #000000;
+  border-radius: 50%;
+}
+
+.imersao-card-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.imersao-card-duration {
+  font-size: 1rem;
+  color: #666666;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 /* Tabela de investimento - layout destacado */
@@ -304,9 +456,19 @@
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   vertical-align: top;
+  font-size: 0.5625rem;
+}
+
+.proposta-table.investment-table tbody td:first-child {
+  width: 66.66% !important;
+  min-width: 66.66% !important;
+  max-width: 66.66% !important;
 }
 
 .proposta-table.investment-table tbody td:last-child {
+  width: 33.33% !important;
+  min-width: 33.33% !important;
+  max-width: 33.33% !important;
   font-weight: 600;
   text-align: right;
   border-right: none;
@@ -379,6 +541,140 @@
   margin-bottom: 2rem;
 }
 
+/* Acordeons - estilo elegante sem bordas */
+.accordion-section {
+  margin: 3.5rem 0;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0.75rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
+  text-align: left;
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: #000000;
+  transition: opacity 0.2s ease;
+  margin-bottom: 1.5rem;
+  outline: none;
+}
+
+.accordion-header:hover {
+  opacity: 0.7;
+}
+
+.accordion-header:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion-header.open {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion-title {
+  flex: 1;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  font-size: 2.25rem;
+}
+
+.accordion-icon {
+  font-size: 6rem;
+  font-weight: 300;
+  color: #000000;
+  margin-left: 1rem;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+
+.accordion-content {
+  padding: 0;
+  background: transparent;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Layout especial para Entregáveis */
+/* Título de Entregáveis - sem linha e com pouco espaço */
+.proposta-conteudo h4.entregaveis-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.entregaveis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.entregavel-card {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  line-height: 1.6;
+  font-size: 1.125rem;
+}
+
+.entregavel-card:hover {
+  background: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.entregavel-card strong {
+  font-weight: 500;
+  color: #000000;
+}
+
+/* Tabela de investimento simplificada */
+.proposta-table.investment-simplified {
+  margin: 2rem 0;
+}
+
+.proposta-table.investment-simplified tbody tr.investment-total {
+  background: #000000;
+  color: #ffffff;
+}
+
+.proposta-table.investment-simplified tbody tr.investment-total td {
+  background: #000000;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  font-size: 1.125rem;
+  padding: 1.5rem 1.5rem;
+}
+
+.proposta-table.investment-simplified tbody tr.investment-total td strong {
+  color: #ffffff;
+}
+
+.proposta-table.investment-simplified tbody tr:not(.investment-total):hover td {
+  background: #f9f9f9;
+}
+
 @media (max-width: 768px) {
   .proposta-detalhe {
     padding: 2rem 1rem;
@@ -395,4 +691,367 @@
   .proposta-conteudo {
     font-size: 1rem;
   }
+
+  .accordion-header {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .accordion-content {
+    padding: 1.5rem;
+  }
+
+  .entregaveis-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Seletor de modo de visualização */
+.view-mode-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 4rem 2rem;
+}
+
+.view-mode-content {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.view-mode-content h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  color: #000000;
+}
+
+.view-mode-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.view-mode-btn {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0;
+  padding: 2.5rem 2rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  outline: none;
+}
+
+.view-mode-btn:focus {
+  outline: none;
+  border: 2px solid #000000;
+}
+
+.view-mode-btn:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.view-mode-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: inherit;
+}
+
+.view-mode-desc {
+  font-size: 1rem;
+  font-weight: 300;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.proposta-header-sticky {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 100;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.view-mode-switcher {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.view-mode-switch {
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  min-width: 120px;
+  text-align: center;
+  display: inline-block;
+}
+
+.view-mode-switch:focus {
+  outline: none;
+  border: 1px solid #000000;
+}
+
+.view-mode-switch:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.view-mode-switch.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Botão de impressão */
+.print-button {
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #000000;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.print-button:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Estilos de impressão */
+@media print {
+  .proposta-header-sticky,
+  .print-button,
+  .back-link,
+  .view-mode-switcher {
+    display: none !important;
+  }
+  
+  .proposta-detalhe {
+    padding: 0 !important;
+  }
+  
+  .accordion-section {
+    page-break-inside: avoid;
+  }
+  
+  .accordion-content {
+    display: block !important;
+  }
+  
+  .accordion-header {
+    pointer-events: none;
+  }
+  
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Estilos para seção de investimento customizada (igual ao resumo) */
+.investimento-section-custom {
+  margin-bottom: 5rem;
+}
+
+.investimento-section-custom .investimento-resumo {
+  margin-bottom: 3rem;
+}
+
+.investimento-section-custom .investimento-descricao {
+  color: #666666;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.investimento-section-custom .investimento-descricao p {
+  margin-bottom: 1rem;
+}
+
+.investimento-section-custom .investimento-descricao p:last-child {
+  margin-bottom: 0;
+}
+
+.investimento-section-custom .investimento-total {
+  background: #000000;
+  color: #ffffff;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.investimento-section-custom .investimento-total span {
+  font-weight: 300;
+}
+
+.investimento-section-custom .investimento-total strong {
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.investimento-section-custom .investimento-detalhamento {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #ffffff;
+  border: 2px solid #000000;
+}
+
+.investimento-section-custom .detalhamento-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.investimento-section-custom .detalhamento-item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #cccccc;
+}
+
+.investimento-section-custom .detalhamento-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.investimento-section-custom .detalhamento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.investimento-section-custom .detalhamento-header > div {
+  flex: 1;
+}
+
+.investimento-section-custom .detalhamento-nota {
+  font-size: 0.875rem;
+  color: #666666;
+  font-weight: 700;
+  font-style: normal;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.investimento-section-custom .detalhamento-titulo {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+}
+
+.investimento-section-custom .detalhamento-valor {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #000000;
+}
+
+.investimento-section-custom .detalhamento-entregaveis {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.investimento-section-custom .detalhamento-entregaveis li {
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  color: #666666;
+  font-weight: 300;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.investimento-section-custom .detalhamento-entregaveis li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #000000;
+  font-weight: 400;
+}
+
+.investimento-section-custom .investimento-pagamento {
+  background: #f9f9f9;
+  border: 2px solid #000000;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.investimento-section-custom .investimento-pagamento h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.investimento-section-custom .pagamento-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.investimento-section-custom .pagamento-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.investimento-section-custom .step-percent {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.investimento-section-custom .step-desc {
+  font-size: 0.875rem;
+  color: #666666;
+  font-weight: 300;
+  line-height: 1.4;
 }

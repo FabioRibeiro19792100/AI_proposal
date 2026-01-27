@@ -1,0 +1,671 @@
+/* ============================================
+   DESAFIO IA GLOBO - DESIGN SYSTEM CSS
+   Adaptado para o estilo visual do projeto
+   ============================================ */
+
+/* ============================================
+   1. VARIÁVEIS GLOBAIS
+   ============================================ */
+:root {
+    /* Cores principais - Projeto atual */
+    --color-bg: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-2: #f5f5f5;
+    --color-text: #000000;
+    --color-text-secondary: #666666;
+    --color-accent: #000000;
+    --color-accent-2: #000000;
+    --color-border: #e5e5e5;
+    
+    /* Cores de status - Adaptadas para preto/branco */
+    --color-success: #000000;
+    --color-warning: #666666;
+    --color-danger: #000000;
+    
+    /* Tipografia - Projeto atual */
+    --font-mono: 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    
+    /* Espaçamentos */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 8rem;
+    
+    /* Raios de borda */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    
+    /* Transições */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ============================================
+   2. RESET E BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.8;
+    font-weight: 300;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Garantir que o conteúdo da proposta IA seja visível */
+.proposta-ia-content {
+    color: var(--color-text);
+    line-height: 1.8;
+    font-size: 1.125rem;
+    font-weight: 300;
+}
+
+.proposta-ia-content h1,
+.proposta-ia-content h2,
+.proposta-ia-content h3,
+.proposta-ia-content h4 {
+    color: var(--color-text);
+    font-weight: 300;
+}
+
+.proposta-ia-content p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+.proposta-ia-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 0;
+}
+
+.proposta-ia-content li {
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   3. TIPOGRAFIA
+   ============================================ */
+.text-mono {
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-base {
+    font-size: 1rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-xl {
+    font-size: 1.5rem;
+}
+
+.text-2xl {
+    font-size: 2rem;
+}
+
+.text-3xl {
+    font-size: 3rem;
+}
+
+/* ============================================
+   4. CONTAINERS E LAYOUT
+   ============================================ */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15.68rem;
+}
+
+.section {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* ============================================
+   5. GRID SYSTEM
+   ============================================ */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* ============================================
+   6. CARDS
+   ============================================ */
+.card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: all var(--transition-normal);
+}
+
+.card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+
+.card-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* ============================================
+   7. BADGES (Alto/Médio/Baixo)
+   ============================================ */
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 400;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-success {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.badge-warning {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.badge-danger {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.badge-info {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+/* ============================================
+   8. BUTTONS
+   ============================================ */
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) calc(var(--spacing-md) + 0.5rem);
+    background: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+}
+
+.btn.active {
+    background: var(--color-accent);
+    color: var(--color-bg);
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--color-accent);
+}
+
+/* ============================================
+   9. NAVIGATION
+   ============================================ */
+.nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 100;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 15.68rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+    font-weight: 400;
+}
+
+.nav-link:hover {
+    color: var(--color-text);
+}
+
+/* ============================================
+   10. SECTIONS HEADERS
+   ============================================ */
+.section-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-number {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 400;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* ============================================
+   11. TIMELINE (Para Jornada)
+   ============================================ */
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: var(--spacing-md);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3.5rem;
+    top: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 3px solid var(--color-bg);
+}
+
+.timeline-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.timeline-description {
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* ============================================
+   12. TABS
+   ============================================ */
+.tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    font-family: var(--font-sans);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn var(--transition-slow);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ============================================
+   13. PROS/CONS LISTS
+   ============================================ */
+.pros-cons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.pros, .cons {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}
+
+.pros {
+    border-color: var(--color-border);
+}
+
+.cons {
+    border-color: var(--color-border);
+}
+
+.pros-title, .cons-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+}
+
+.pros-title {
+    color: var(--color-text);
+}
+
+.cons-title {
+    color: var(--color-text);
+}
+
+.pros ul, .cons ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pros li, .cons li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.pros li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-text);
+    font-weight: bold;
+}
+
+.cons li::before {
+    content: '⚠';
+    position: absolute;
+    left: 0;
+    color: var(--color-text);
+}
+
+/* ============================================
+   14. PHASE CARDS (Para Proposta)
+   ============================================ */
+.phase {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.phase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-accent);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.phase-number {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.phase-title {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--color-text);
+}
+
+.phase-duration {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    padding: 0.5rem var(--spacing-sm);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-weight: 400;
+}
+
+.phase-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* ============================================
+   15. ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+    50% { 
+        transform: translateY(10px); 
+        opacity: 0.5; 
+    }
+}
+
+@keyframes gridFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50px); }
+}
+
+/* ============================================
+   16. UTILITY CLASSES
+   ============================================ */
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.text-center { text-align: center; }
+.text-secondary { color: var(--color-text-secondary); }
+.text-accent { color: var(--color-accent); }
+
+/* ============================================
+   17. RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .section {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .nav-content {
+        padding: 1.5rem var(--spacing-sm);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        padding-left: var(--spacing-md);
+    }
+
+    .phase-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
+
+/* ============================================
+   18. LINKS
+   ============================================ */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-normal);
+    font-weight: 400;
+}
+
+a:hover {
+    border-bottom-color: var(--color-text);
+}
+
+/* ============================================
+   FIM DO DESIGN SYSTEM
+   ============================================ */

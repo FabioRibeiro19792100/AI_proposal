@@ -32,7 +32,7 @@
 .propostas-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4rem 2rem;
+  gap: 4rem 6rem;
 }
 
 .proposta-card {

@@ -6,8 +6,8 @@ function Biblioteca() {
     {
       id: 9,
       categoria: 'Premissas e Contexto',
-      titulo: 'Briefing Globo',
-      arquivo: 'Briefing Globo.md',
+      titulo: 'Briefing Inicial',
+      arquivo: 'Briefing Inicial.md',
       tipo: 'Documento de briefing',
       descricao: 'Resumo executivo das ações e responsabilidades da Mastertech baseado em reunião'
     },
@@ -43,7 +43,6 @@ function Biblioteca() {
     <div className="biblioteca">
       <div className="biblioteca-container">
         <div className="biblioteca-header">
-          <h1>Biblioteca</h1>
         </div>
 
         {categorias.map((categoria) => {
@@ -55,7 +54,7 @@ function Biblioteca() {
                 {docsCategoria.map((doc, index) => (
                   <Link
                     key={doc.id}
-                    to={`/biblioteca/${doc.id}`}
+                    to={`/briefings/${doc.id}`}
                     className="documento-card"
                   >
                     <span className="card-number">

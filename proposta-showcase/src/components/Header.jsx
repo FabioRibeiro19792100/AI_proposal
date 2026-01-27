@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import '../styles/Header.css'
 
 function Header() {
+  const location = useLocation()
+  
+  if (location.pathname === '/') {
+    return null
+  }
+  
   return (
-    <header className="header">
+    <header className="header" style={{ marginTop: 0, paddingTop: 0 }}>
       <div className="header-container">
-        <Link to="/" className="logo">
-          <h1>Proposta Globo</h1>
-        </Link>
         <nav className="nav">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/propostas" className="nav-link">Outcomes</Link>
-          <Link to="/biblioteca" className="nav-link">Biblioteca</Link>
-          <Link to="/sobre" className="nav-link">Sobre</Link>
+          <Link to="/" className="header-nav-link">Home</Link>
+          <Link to="/propostas" className="header-nav-link">Propostas</Link>
+          <Link to="/briefings" className="header-nav-link">Briefings & Refs</Link>
         </nav>
       </div>
     </header>

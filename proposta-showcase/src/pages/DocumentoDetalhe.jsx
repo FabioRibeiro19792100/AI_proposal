@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import '../styles/DocumentoDetalhe.css'
 import { 
@@ -13,8 +13,8 @@ import {
 // Dados dos documentos
 const documentosData = {
   9: {
-    titulo: 'Briefing Globo',
-    arquivo: 'Briefing Globo.md',
+    titulo: 'Briefing Inicial',
+    arquivo: 'Briefing Inicial.md',
     tipo: 'Documento de briefing',
     categoria: 'Premissas e Contexto',
     descricao: 'Resumo executivo das ações e responsabilidades da Mastertech baseado em reunião',
@@ -94,6 +94,27 @@ function renderContent(content, keyPrefix) {
   let inTable = false
   let tableHeaders = null
   let tableKey = 0
+  let inTemasSection = false
+  let currentTemaCard = null
+  let temasCards = []
+  let inProximosPassos = false
+  let proximosPassosItems = []
+  let inTemposMovimentos = false
+  let temposMovimentosItems = []
+  let currentMes = null
+  let currentSectionIndex = 0
+  let inOddSection = false
+  let oddSectionContent = []
+  let oddSectionStartIndex = null
+
+  // Função auxiliar para adicionar elemento na seção correta
+  const addElement = (element) => {
+    if (inOddSection) {
+      oddSectionContent.push(element)
+    } else {
+      elements.push(element)
+    }
+  }
 
   content.forEach((line, index) => {
     const fullIndex = `${keyPrefix}-${index}`
@@ -138,7 +159,7 @@ function renderContent(content, keyPrefix) {
         )
         const colCount = tableHeaders.length
         
-        elements.push(
+        const tableElement = (
           <table 
             key={`table-${tableKey++}`} 
             className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
@@ -161,9 +182,10 @@ function renderContent(content, keyPrefix) {
             </tbody>
           </table>
         )
+        addElement(tableElement)
       } else if (currentTable.length > 0) {
         const colCount = currentTable[0]?.length || 0
-        elements.push(
+        const tableElement = (
           <table 
             key={`table-${tableKey++}`} 
             className={`documento-table ${colCount > 4 ? 'wide-table' : ''}`}
@@ -179,6 +201,7 @@ function renderContent(content, keyPrefix) {
             </tbody>
           </table>
         )
+        addElement(tableElement)
       }
       inTable = false
       currentTable = []
@@ -197,50 +220,259 @@ function renderContent(content, keyPrefix) {
       elements.push(<h1 key={fullIndex}>{line.substring(2)}</h1>)
     } else if (line.startsWith('## ') && !line.startsWith('### ')) {
       if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
-        currentList = []
+        if (inProximosPassos) {
+          proximosPassosItems.push(...currentList)
+          currentList = []
+        } else {
+          elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
+          currentList = []
+        }
         inList = false
       }
-      elements.push(<h2 key={fullIndex}>{line.substring(3)}</h2>)
+      
+      // Finaliza cards de temas se estiver na seção
+      if (inTemasSection && temasCards.length > 0) {
+        elements.push(
+          <div key={`temas-cards-${index}`} className="temas-cards-grid">
+            {temasCards.map((card, i) => (
+              <div key={i} className="tema-card">
+                <h3 className="tema-card-title">{card.title}</h3>
+                <p className="tema-card-description">{card.description}</p>
+              </div>
+            ))}
+          </div>
+        )
+        temasCards = []
+        inTemasSection = false
+      }
+      
+      // Finaliza próximos passos se estiver na seção
+      if (inProximosPassos && proximosPassosItems.length > 0) {
+        elements.push(
+          <div key={`proximos-passos-${index}`} className="proximos-passos-timeline">
+            {proximosPassosItems.map((itemText, i) => {
+              // Procura por padrão **DATA** ou **DATA - DATA**
+              const dateMatch = itemText.match(/\*\*([^*]+)\*\*/)
+              const date = dateMatch ? dateMatch[1] : ''
+              const task = dateMatch ? itemText.replace(/\*\*[^*]+\*\*/, '').trim() : itemText.trim()
+              
+              return (
+                <div key={i} className="proximo-passo-item">
+                  <div className="proximo-passo-task">{formatInlineMarkdown(task)}</div>
+                  {date && <div className="proximo-passo-date">{date}</div>}
+                </div>
+              )
+            })}
+          </div>
+        )
+        proximosPassosItems = []
+        inProximosPassos = false
+      }
+      
+      // Finaliza tempos e movimentos se estiver na seção
+      if (inTemposMovimentos && temposMovimentosItems.length > 0) {
+        if (currentMes) {
+          temposMovimentosItems.push({ mes: currentMes, atividades: [] })
+        }
+        elements.push(
+          <div key={`tempos-movimentos-${index}`} className="tempos-movimentos-timeline">
+            {temposMovimentosItems.map((item, i) => (
+              <div key={i} className="tempo-movimento-item">
+                <div className="tempo-movimento-mes">{item.mes}</div>
+                <div className="tempo-movimento-atividades">
+                  {item.atividades.length > 0 ? (
+                    item.atividades.map((atividade, j) => (
+                      <div key={j} className="tempo-movimento-atividade">
+                        {formatInlineMarkdown(atividade)}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="tempo-movimento-empty"></div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+        temposMovimentosItems = []
+        currentMes = null
+        inTemposMovimentos = false
+      }
+      
+      const h2Text = line.substring(3).trim()
+      
+      // Detecta seções H2 numeradas (1., 2., 3., etc.)
+      const isNumberedSection = /^\d+\./.test(h2Text)
+      
+      if (isNumberedSection) {
+        currentSectionIndex++
+        const isOdd = currentSectionIndex % 2 === 1
+        
+        // Finaliza seção ímpar anterior se existir
+        if (inOddSection && oddSectionContent.length > 0) {
+          elements.push(
+            <div key={`odd-section-${oddSectionStartIndex}`} className="odd-section-wrapper">
+              {oddSectionContent}
+            </div>
+          )
+          oddSectionContent = []
+          inOddSection = false
+        }
+        
+        // Inicia nova seção ímpar
+        if (isOdd) {
+          inOddSection = true
+          oddSectionStartIndex = index
+          oddSectionContent = []
+        }
+      }
+      
+      if (h2Text === 'Sugestões de Temas') {
+        inTemasSection = true
+      } else if (h2Text === 'Próximos Passos') {
+        inProximosPassos = true
+      } else if (h2Text === 'Tempos & Movimentos' || h2Text === 'Tempos e Movimentos') {
+        inTemposMovimentos = true
+      }
+      
+      if (inOddSection) {
+        oddSectionContent.push(<h2 key={fullIndex}>{h2Text}</h2>)
+      } else {
+        elements.push(<h2 key={fullIndex}>{h2Text}</h2>)
+      }
     } else if (line.startsWith('### ') && !line.startsWith('#### ')) {
       if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
-        currentList = []
+        if (inProximosPassos) {
+          proximosPassosItems.push(...currentList)
+          currentList = []
+        } else {
+          elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
+          currentList = []
+        }
         inList = false
       }
-      elements.push(<h3 key={fullIndex}>{line.substring(4)}</h3>)
+      
+      // Se estamos na seção de temas, inicia um novo card
+      if (inTemasSection) {
+        if (currentTemaCard) {
+          temasCards.push(currentTemaCard)
+        }
+        currentTemaCard = {
+          title: line.substring(4).trim(),
+          description: ''
+        }
+      } else {
+        addElement(<h3 key={fullIndex}>{line.substring(4)}</h3>)
+      }
     } else if (line.startsWith('#### ')) {
       if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
+        const listElement = <ul key={`list-${fullIndex}`}>{currentList}</ul>
+        addElement(listElement)
         currentList = []
         inList = false
       }
-      elements.push(<h4 key={fullIndex}>{line.substring(5)}</h4>)
+      addElement(<h4 key={fullIndex}>{line.substring(5)}</h4>)
     } else if (line.trim() === '---') {
       if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
+        const listElement = <ul key={`list-${fullIndex}`}>{currentList}</ul>
+        addElement(listElement)
         currentList = []
         inList = false
       }
-      elements.push(<hr key={fullIndex} />)
+      // Não renderiza hr - as faixas alternadas já separam as seções
     } else if (line.trim().startsWith('- ')) {
       if (!inList) inList = true
       const content = line.substring(2).trim()
-      currentList.push(<li key={fullIndex}>{formatInlineMarkdown(content)}</li>)
+      if (inProximosPassos) {
+        // Para próximos passos, guarda a linha original para processar depois
+        proximosPassosItems.push(content)
+      } else {
+        const listItem = <li key={fullIndex}>{formatInlineMarkdown(content)}</li>
+        currentList.push(listItem)
+      }
     } else if (line.trim() === '') {
       if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
+        const listElement = <ul key={`list-${fullIndex}`}>{currentList}</ul>
+        addElement(listElement)
         currentList = []
         inList = false
       }
     } else {
-      if (inList) {
-        elements.push(<ul key={`list-${fullIndex}`}>{currentList}</ul>)
-        currentList = []
-        inList = false
-      }
-      if (line.trim()) {
-        elements.push(<p key={fullIndex}>{formatInlineMarkdown(line)}</p>)
+      // Se estamos em um card de tema, adiciona a descrição
+      if (inTemasSection && currentTemaCard && line.trim() && !line.trim().startsWith('---')) {
+        if (currentTemaCard.description) {
+          currentTemaCard.description += ' ' + line.trim()
+        } else {
+          currentTemaCard.description = line.trim()
+        }
+      } else if (inTemposMovimentos && line.trim() && !line.trim().startsWith('---')) {
+        // Detecta meses em negrito (formato **Mês**)
+        const mesMatch = line.trim().match(/^\*\*([^*]+)\*\*$/)
+        if (mesMatch) {
+          // Salva mês anterior se existir
+          if (currentMes) {
+            const existingItem = temposMovimentosItems.find(item => item.mes === currentMes)
+            if (!existingItem) {
+              temposMovimentosItems.push({ mes: currentMes, atividades: [] })
+            }
+          }
+          currentMes = mesMatch[1]
+          // Cria novo item para o mês atual
+          const existingItem = temposMovimentosItems.find(item => item.mes === currentMes)
+          if (!existingItem) {
+            temposMovimentosItems.push({ mes: currentMes, atividades: [] })
+          }
+        } else if (currentMes && line.trim()) {
+          // Adiciona atividade ao mês atual
+          const existingItem = temposMovimentosItems.find(item => item.mes === currentMes)
+          if (existingItem) {
+            existingItem.atividades.push(line.trim())
+          } else {
+            temposMovimentosItems.push({ mes: currentMes, atividades: [line.trim()] })
+          }
+        }
+      } else if (inProximosPassos && line.trim() && !line.trim().startsWith('---')) {
+        // Se estamos em próximos passos e há uma linha com data em negrito, adiciona ao último item
+        if (proximosPassosItems.length > 0 && line.trim().match(/\*\*[^*]+\*\*/)) {
+          const lastIndex = proximosPassosItems.length - 1
+          proximosPassosItems[lastIndex] += ' ' + line.trim()
+        } else if (inList) {
+          // Se está em lista, finaliza e processa
+          if (currentList.length > 0) {
+            currentList.forEach(item => {
+              const itemText = typeof item === 'object' && item.props ? 
+                (Array.isArray(item.props.children) ? item.props.children.map(c => typeof c === 'string' ? c : '').join('') : '') : 
+                item
+              if (typeof itemText === 'string') {
+                proximosPassosItems.push(itemText)
+              }
+            })
+            currentList = []
+          }
+          inList = false
+        }
+      } else {
+        if (inList) {
+          if (inProximosPassos) {
+            currentList.forEach(item => {
+              const itemText = typeof item === 'object' && item.props ? 
+                (Array.isArray(item.props.children) ? item.props.children.map(c => typeof c === 'string' ? c : '').join('') : '') : 
+                item
+              if (typeof itemText === 'string') {
+                proximosPassosItems.push(itemText)
+              }
+            })
+            currentList = []
+          } else {
+            const listElement = <ul key={`list-${fullIndex}`}>{currentList}</ul>
+            addElement(listElement)
+            currentList = []
+          }
+          inList = false
+        }
+        if (line.trim() && !inProximosPassos) {
+          addElement(<p key={fullIndex}>{formatInlineMarkdown(line)}</p>)
+        }
       }
     }
   })
@@ -260,7 +492,7 @@ function renderContent(content, keyPrefix) {
       )
       const colCount = tableHeaders.length
       
-      elements.push(
+      const tableElement = (
         <table 
           key={`table-${tableKey++}`} 
           className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
@@ -283,28 +515,102 @@ function renderContent(content, keyPrefix) {
           </tbody>
         </table>
       )
-    } else if (currentTable.length > 0) {
-      const colCount = currentTable[0]?.length || 0
-      elements.push(
-        <table 
-          key={`table-${tableKey++}`} 
-          className={`documento-table ${colCount > 4 ? 'wide-table' : ''}`}
-        >
-          <tbody>
-            {currentTable.map((row, rIndex) => (
-              <tr key={rIndex}>
-                {row.map((cell, cIndex) => (
-                  <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )
-    }
+      addElement(tableElement)
+      } else if (currentTable.length > 0) {
+        const colCount = currentTable[0]?.length || 0
+        const tableElement = (
+          <table 
+            key={`table-${tableKey++}`} 
+            className={`documento-table ${colCount > 4 ? 'wide-table' : ''}`}
+          >
+            <tbody>
+              {currentTable.map((row, rIndex) => (
+                <tr key={rIndex}>
+                  {row.map((cell, cIndex) => (
+                    <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+        addElement(tableElement)
+      }
   }
 
-  if (inList) {
+  // Finaliza cards de temas se ainda estiver na seção
+  // Finaliza seção ímpar se ainda estiver aberta
+  if (inOddSection && oddSectionContent.length > 0) {
+    elements.push(
+      <div key={`odd-section-final`} className="odd-section-wrapper">
+        {oddSectionContent}
+      </div>
+    )
+  }
+
+  if (inTemasSection && currentTemaCard) {
+    temasCards.push(currentTemaCard)
+  }
+  if (inTemasSection && temasCards.length > 0) {
+    elements.push(
+      <div key="temas-cards-final" className="temas-cards-grid">
+        {temasCards.map((card, i) => (
+          <div key={i} className="tema-card">
+            <h3 className="tema-card-title">{card.title}</h3>
+            <p className="tema-card-description">{card.description}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+  
+  // Finaliza próximos passos se ainda estiver na seção
+  if (inProximosPassos && proximosPassosItems.length > 0) {
+    elements.push(
+      <div key="proximos-passos-final" className="proximos-passos-timeline">
+        {proximosPassosItems.map((itemText, i) => {
+          // Procura por padrão **DATA** ou **DATA - DATA**
+          const dateMatch = itemText.match(/\*\*([^*]+)\*\*/)
+          const date = dateMatch ? dateMatch[1] : ''
+          const task = dateMatch ? itemText.replace(/\*\*[^*]+\*\*/, '').trim() : itemText.trim()
+          
+          return (
+            <div key={i} className="proximo-passo-item">
+              <div className="proximo-passo-task">{formatInlineMarkdown(task)}</div>
+              {date && <div className="proximo-passo-date">{date}</div>}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+  
+  // Finaliza tempos e movimentos se ainda estiver na seção
+  if (inTemposMovimentos && temposMovimentosItems.length > 0) {
+    if (currentMes) {
+      temposMovimentosItems.push({ mes: currentMes, atividades: [] })
+    }
+    elements.push(
+      <div key="tempos-movimentos-final" className="tempos-movimentos-timeline">
+        {temposMovimentosItems.map((item, i) => (
+          <div key={i} className="tempo-movimento-item">
+            <div className="tempo-movimento-mes">{item.mes}</div>
+            <div className="tempo-movimento-atividades">
+              {item.atividades.length > 0 ? (
+                item.atividades.map((atividade, j) => (
+                  <div key={j} className="tempo-movimento-atividade">
+                    {formatInlineMarkdown(atividade)}
+                  </div>
+                ))
+              ) : (
+                <div className="tempo-movimento-empty">Sem atividades programadas</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  } else if (inList && !inProximosPassos && !inTemposMovimentos) {
     elements.push(<ul key="list-final">{currentList}</ul>)
   }
 
@@ -347,163 +653,40 @@ function formatInlineMarkdown(text) {
   return parts.length > 0 ? parts : text
 }
 
-// Componente para seção do acordeon (permite usar hooks)
-function AccordionSection({ section, isOpen, onToggle }) {
-  const renderedContent = useMemo(() => {
-    if (!isOpen) return null
-    return renderContent(section.content, `section-${section.key}`)
-  }, [isOpen, section.content, section.key])
-
-  const HeadingTag = section.level === 2 ? 'h2' : section.level === 3 ? 'h3' : 'h4'
-
-  return (
-    <div className="accordion-section">
-      <button
-        className={`accordion-header ${isOpen ? 'open' : ''}`}
-        onClick={onToggle}
-      >
-        <HeadingTag className="accordion-title">{section.title}</HeadingTag>
-        <span className="accordion-icon">{isOpen ? '−' : '+'}</span>
-      </button>
-      {isOpen && (
-        <div className="accordion-content documento-conteudo">
-          {renderedContent}
-        </div>
-      )}
-    </div>
-  )
-}
-
-// Função para processar markdown e criar seções com acordeons
-function processMarkdownForAccordions(text) {
-  if (!text) return []
-  
-  const lines = text.split('\n')
-  const sections = []
-  let currentSection = null
-  let sectionKey = 0
-  let preContent = []
-
-  lines.forEach((line, index) => {
-    // Detecta apenas h2 como acordeons (não h1) - h3, h4 ficam como conteúdo normal
-    const isH1 = line.startsWith('# ') && !line.startsWith('## ')
-    const isH2 = line.startsWith('## ') && !line.startsWith('### ')
-    
-    if (isH1) {
-      // h1 vai para o conteúdo prévio, não vira acordeon
-      if (currentSection !== null) {
-        sections.push({ ...currentSection, key: sectionKey++ })
-        currentSection = null
-      }
-      preContent.push(line)
-    } else if (isH2) {
-      // Salva seção anterior se existir e tiver conteúdo
-      if (currentSection !== null) {
-        // Só adiciona seção se tiver conteúdo (não apenas título vazio)
-        const hasContent = currentSection.content.some(l => l.trim() !== '')
-        if (hasContent) {
-          sections.push({ ...currentSection, key: sectionKey++ })
-        } else {
-          // Se não tem conteúdo, adiciona o título ao prévio
-          preContent.push(`## ${currentSection.title}`)
-        }
-      }
-      
-      const title = line.substring(3).trim()
-      currentSection = {
-        title: title,
-        level: 2,
-        content: [],
-        key: sectionKey
-      }
-    } else {
-      // Todo o resto (h3, h4, parágrafos, listas) vai para o conteúdo
-      if (currentSection === null) {
-        preContent.push(line)
-      } else {
-        // Adiciona tudo ao conteúdo da seção atual (incluindo h3, h4, etc)
-        currentSection.content.push(line)
-      }
-    }
-  })
-
-  // Adiciona última seção apenas se tiver conteúdo
-  if (currentSection !== null) {
-    const hasContent = currentSection.content.some(l => l.trim() !== '')
-    if (hasContent) {
-      sections.push({ ...currentSection, key: sectionKey++ })
-    } else {
-      // Se não tem conteúdo, adiciona o título ao prévio
-      preContent.push(`## ${currentSection.title}`)
-    }
-  }
-
-  return { preContent, sections }
-}
-
 function DocumentoDetalhe() {
   const { id } = useParams()
   const documento = documentosData[id]
-  const [openSections, setOpenSections] = useState(new Set())
 
   if (!documento) {
     return (
       <div className="documento-detalhe">
         <div className="error-message">
           <h2>Documento não encontrado</h2>
-          <Link to="/biblioteca" className="back-link">
-            ← Voltar para Biblioteca
+          <Link to="/briefings" className="back-link">
+            ← Voltar para Briefings
           </Link>
         </div>
       </div>
     )
   }
 
-  const { preContent, sections } = useMemo(() => {
-    return processMarkdownForAccordions(documento.conteudo)
+  const renderedContent = useMemo(() => {
+    if (!documento.conteudo) return null
+    return renderContent(documento.conteudo.split('\n'), 'documento')
   }, [documento.conteudo])
-
-  const renderedPreContent = useMemo(() => {
-    if (preContent.length === 0) return null
-    return renderContent(preContent, 'pre-content')
-  }, [preContent])
-
-  const toggleSection = (key) => {
-    const newOpen = new Set(openSections)
-    if (newOpen.has(key)) {
-      newOpen.delete(key)
-    } else {
-      newOpen.add(key)
-    }
-    setOpenSections(newOpen)
-  }
 
   return (
     <div className="documento-detalhe">
-      <Link to="/biblioteca" className="back-link">
-        ← Voltar para Biblioteca
+      <Link to="/briefings" className="back-link">
+        ← Voltar para Briefings
       </Link>
 
       <article className="documento-article">
         <div className="documento-conteudo">
           {documento.conteudo ? (
-            <>
-              {/* Conteúdo antes do primeiro título */}
-              {renderedPreContent && (
-                <div className="documento-content-section">
-                  {renderedPreContent}
-                </div>
-              )}
-              {/* Acordeons apenas para títulos h2, h3, h4 */}
-              {sections.map((section) => (
-                <AccordionSection
-                  key={section.key}
-                  section={section}
-                  isOpen={openSections.has(section.key)}
-                  onToggle={() => toggleSection(section.key)}
-                />
-              ))}
-            </>
+            <div className="documento-content-section">
+              {renderedContent}
+            </div>
           ) : (
             <p className="documento-nota">
               Este documento está em formato PDF e não pode ser visualizado diretamente no navegador.

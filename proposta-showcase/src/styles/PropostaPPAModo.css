@@ -1,0 +1,95 @@
+.proposta-ppa-modo {
+  min-height: calc(100vh - 5.5rem);
+  background: #ffffff;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modo-container {
+  max-width: 800px;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-top: -8rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  color: #000000;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.modo-header {
+  margin-bottom: 1.5rem;
+}
+
+.modo-header h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #000000;
+  margin-bottom: 0;
+  letter-spacing: -0.02em;
+}
+
+.modo-options {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modo-cta {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  border: 2px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  width: 300px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.modo-cta:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .modo-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modo-cta {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .modo-header h1 {
+    font-size: 2rem;
+  }
+}

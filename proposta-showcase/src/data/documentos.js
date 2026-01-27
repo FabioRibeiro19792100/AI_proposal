@@ -751,65 +751,74 @@ Os pagamentos seguirão os fluxos já praticados pela Globo em contratações an
 
 // Briefing Globo - Resumo executivo baseado em reunião
 export const briefingContent = `# Briefing Globo
-## Resumo Executivo - Desafio de Inteligência Artificial
+## Resumo Executivo - Ações e Responsabilidades Mastertech
+### Baseado em transcrição de reunião
 
 ---
 
-## Contexto
+## 1. Novo Edital: Tecnologia e Inteligência Artificial (Prioridade Alta)
 
-A Globo busca desenvolver um desafio sobre Inteligência Artificial para estudantes de ensino superior do Brasil, com foco na aplicação de IA para produção e distribuição de conteúdo.
+Este é o projeto onde a Mastertech terá **maior protagonismo no desenho e execução**. O objetivo é encontrar talentos universitários que estejam estudando ou pensando em aplicações de IA para produção de conteúdo.
 
----
+### Responsabilidade da Mastertech
+- **Desenhar 100% da mecânica e do conceito**
 
-## Objetivo
+### Público-Alvo
+- Estudantes de **graduação** (exclui-se mestrado/doutorado)
+- De qualquer curso, desde que proponham soluções de conteúdo usando IA
+- A ideia é formar base para contratação futura (estágio/júnior)
 
-Esquematizar desde a chamada, tema, gancho e mote para conceber o desafio que coleta propostas de uso de IA na criação de conteúdos para o ecossistema Globo.
+### Mecânica Proposta (Framework)
+- **Convocatória e Seleção:** Definir como selecionar os jovens (protótipo, ideia, etc.)
+- **Imersão:** Formato War Room ou laboratório nos Estúdios Globo (Rio de Janeiro)
+- **Metodologia:** Utilizar Design Sprint ou Hackathon durante cerca de uma semana, onde os alunos criarão protótipos
+- **Cronograma:** A imersão deve ocorrer por volta de **agosto/setembro** (período eleitoral)
 
----
-
-## Restrições e Desafios
-
-### Questões Sensíveis
-- O tema envolve tabu - IA na produção de conteúdo é sensível (substituição de empregos, sindicatos)
-- A Globo não pode abrir estratégia - Não pode revelar roadmap interno ou gaps tecnológicos
-- Mercado pode ler equivocadamente a iniciativa - Risco reputacional se mal comunicado
-
-### Qualidade das Submissões
-- Devemos evitar hipóteses como ideias - Precisa ter fundamento técnico, não apenas "achismos"
-- A ideia precisa de lastro técnico - Soluções devem ser tecnicamente viáveis e demonstráveis
-- Pessoas podem não entender as dimensões do que envolve conteúdo na Globo - Cadeia complexa (pré-produção → produção → pós → acervo → distribuição)
-
-### Guardrails Necessários
-- Devemos ter um guideline para evitar dispersão (tipo Netflix) - Framework claro de avaliação
-- Há camadas jurídicas - Direitos autorais, imagem, consentimento, sindicatos
-- Diferenciar talentos humanos de talentos artificiais - IA como assistente, não substituto
-
-### Complexidade Operacional
-- Não podemos ter um processo com overengineering - Mecânica precisa ser clara e executável
-- Deixar mais aberto pode ser interessante (...) risco de ataques - Dilema entre abertura criativa vs controle de risco
+### Entregável Imediato
+- Criar um **framework visual** (não precisa estar finalizado) com a linha do tempo e momentos chaves para apresentar na reunião do dia 28
 
 ---
 
-## Princípios Orientadores
+## 2. Edital PPA (Prêmio Profissionais do Ano) - Publicidade
 
-1. **SIMPLICIDADE** - Mecânica clara, sem overengineering
-2. **FUNDAMENTO** - Exigir lastro técnico (protótipo)
-3. **PROTEÇÃO** - Framework para evitar propostas polêmicas
-4. **ESPECIFICIDADE** - Categorias/desafios claros
-5. **SEPARAÇÃO** - Modular tema vs mecânica
-6. **PROTOTIPAÇÃO** - Mockar experiência antes
-7. **REFERÊNCIA** - Usar Netflix como benchmark
-8. **ÉTICA** - IA como ferramenta, não substituto
+Neste projeto, a mecânica será mais **"padrão"**, adaptada ao modelo do prêmio já existente, focada na criação de peças publicitárias.
+
+### Responsabilidade da Mastertech
+- Gerenciar a **"convocatória aberta"** (chamada nacional)
+- Realizar a **"primeira peneira"** (seleção inicial) dos estudantes
+- Apoiar na concepção da **narrativa do edital** (provável tema social/valorização do professor)
+
+### Fluxo
+- Os alunos selecionados pela Mastertech farão uma imersão para produzir peças que serão avaliadas pelo júri oficial do PPA
+
+### Planejamento
+- É necessário criar um **"calendário reverso"** baseado na data do júri oficial (novembro é a final, mas há etapas anteriores)
 
 ---
 
-## Responsabilidades Mastertech
+## 3. Jornalismo
 
-- Facilitação do processo de construção colaborativa do mote
-- Análise e síntese de informações
-- Desenvolvimento de hipóteses e recomendações
-- Prototipação de diferentes abordagens
-- Documentação do processo e decisões
+- **Status:** A imersão ocorrerá no segundo semestre e as disciplinas eletivas (PUC e USP) estão encaminhadas
+- **Não haverá edital aberto neste ano** devido ao ano eleitoral
+- **Ação:** Nenhuma ação imediata de planejamento requerida para este pilar no momento
+
+---
+
+## 4. Agenda e Próximos Passos (Curto Prazo)
+
+A equipe precisa se organizar para validar as ideias antes da reunião oficial com o cliente.
+
+### Reunião Interna (Mastertech)
+- Agendar para **segunda-feira (tarde) ou terça-feira (manhã)** – provável dia 26
+- Objetivo: Desenhar o rascunho/framework
+
+### Validação com Viri
+- Reunião marcada para o dia **27 (terça-feira)**, preferencialmente pela manhã (9h ou 10h)
+- Objetivo: Alinhar a proposta preliminar
+
+### Reunião com Parceiros/Tecnologia
+- Dia **28 (quarta-feira)**
+- Objetivo: Apresentar o framework visual e a linha do tempo
 
 ---
 
@@ -838,12 +847,6 @@ Reforça o compromisso da marca com educação e amplia a presença da Academia 
 
 ### 4. Fomentar o mercado através da Master Globo
 Promove a Master Globo como plataforma de formação em soluções multiplataforma, preparando profissionais para o ecossistema de negócios da Globo.
-
----
-
-## E qual o tema?
-
-E qual o tema?
 
 ---
 
@@ -973,10 +976,7 @@ Veiculação
 _v.1.2_`
 
 // Proposta PPA - Focada nos 6 primeiros pontos da mecânica
-export const propostaPPAContent = `# Proposta Comercial
-## Academia LED PPA – Prêmio Profissionais do Ano
-### Mastertech para Globo
-
+export const propostaPPAContent = `
 ---
 
 ## Objetivo
@@ -1130,12 +1130,12 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 **Estrutura da Imersão:**
 
-| Atividade | Duração | Local |
-|-----------|---------|-------|
-| Acolhimento e briefing | 1 dia | Globo SP |
-| Desenvolvimento criativo | 5 dias | Globo SP |
-| Produção dos videocases | 5 dias | Globo SP |
-| Finalização e entrega | 2 dias | Globo SP |
+| Atividade | Duração |
+|-----------|---------|
+| Acolhimento e briefing | 1 dia |
+| Desenvolvimento criativo | 5 dias |
+| Produção dos videocases | 5 dias |
+| Finalização e entrega | 2 dias |
 
 **Entregáveis:**
 - 3 videocases finalizados e prontos para avaliação do júri PPA
@@ -1147,7 +1147,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 ## Cronograma e Timeline
 
 | Fase | Duração | Período | Entregável Principal |
-|------|---------|---------|---------------------|
+|------|---------|---------|----------------------|
 | **Fase 1: Convocatória** | 6 semanas | Abril 2026 | Inscrições validadas |
 | **Fase 2: Seleção Inicial** | 3 semanas | Maio 2026 | 10 equipes selecionadas |
 | **Fase 3: Mentoria** | 4 semanas | Maio-Junho 2026 | Campanhas aprimoradas |
@@ -1196,24 +1196,31 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 ## Investimento e Precificação
 
-### Estrutura de Custos
+### DETALHAMENTO DAS ENTREGAS:
 
-| Item | Descrição | Valor |
-|------|-----------|-------|
-| **Desenvolvimento e Infraestrutura** | | |
-| Plataforma de inscrições | Sistema web completo com área do participante e painel admin | R$ 45.000 |
-| Sistema de gestão e avaliação | Workflow configurável, dashboard, relatórios | R$ 35.000 |
-| Infraestrutura e hospedagem | Servidores, domínio, SSL, backup (12 meses) | R$ 12.000 |
-| **Operação** | | |
-| Gestão Fase 1: Convocatória | Comunicação, suporte, validação de inscrições | R$ 55.000 |
-| Gestão Fase 2: Seleção Inicial | Organização de banca, consolidação, seleção | R$ 40.000 |
-| Gestão Fase 3: Mentoria | Condução de mentoria para 10 equipes (4 semanas) | R$ 65.000 |
-| Gestão Fase 4: Pitch | Estruturação, coordenação, seleção | R$ 30.000 |
-| Gestão Fase 5: Encontros + Imersão | 4 encontros online + coordenação imersão presencial | R$ 85.000 |
-| **Comunicação** | | |
-| Materiais de divulgação | Design, produção de peças, vídeos | R$ 45.000 |
-| Gestão de comunicação | Comunicação com participantes, redes sociais | R$ 25.000 |
-| **Total** | | **R$ 437.000** |
+**Fases 1, 2 e 4 (R$ 43.500,00):**
+- Plataforma de inscrições funcional e responsiva
+- Base de dados completa de inscrições validadas
+- Processo de avaliação documentado
+- Seleção das 10 equipes
+- Pitch e seleção das 3 finalistas
+
+**Fase 3 - Mentoria (R$ 21.000,00):**
+- 10 campanhas aprimoradas e documentadas
+- Roteiros revisados e otimizados
+- Equipes preparadas para o pitch
+
+**Fase 5 - Imersão (R$ 65.000,00):**
+- 3 videocases finalizados
+- Documentação completa do processo
+- Relatório final com métricas
+
+**Infraestrutura:**
+- Microsoft Forms ou Typeform
+- Sistemas de análise de submissões
+- Plataforma de gestão
+
+**Total: R$ 129.500,00**
 
 ### Forma de Pagamento
 
@@ -1269,11 +1276,6 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Definição de equipes e responsabilidades
 - Estabelecimento de canais de comunicação
 - Início do planejamento detalhado da Fase 1
-
----
-
-**Mastertech**  
-*Transformando desafios em oportunidades*
 
 ---
 
@@ -1690,12 +1692,7 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 - Coordenação Fase 2: R$ 80.000 - R$ 100.000
 - Mentoria técnica: R$ 40.000 - R$ 60.000
 
-**Comunicação:**
-- Materiais de divulgação: R$ 40.000 - R$ 60.000
-- Produção de conteúdo: R$ 50.000 - R$ 70.000
-- Gestão de comunicação: R$ 30.000 - R$ 40.000
-
-**Total estimado:** R$ 515.000 - R$ 785.000
+**Total estimado:** R$ 395.000 - R$ 615.000
 
 *Valores podem variar conforme escopo final definido na Fase 0*
 
@@ -1775,11 +1772,6 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 - Apresentação do processo de construção do mote
 - Definição de cronograma detalhado
 - Início dos workshops colaborativos
-
----
-
-**Mastertech**  
-*Transformando desafios em oportunidades*
 
 ---
 
