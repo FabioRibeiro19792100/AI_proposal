@@ -4,10 +4,11 @@ import '../styles/design-system.css'
 import '../styles/PropostaIADetalhe.css'
 
 function PropostaIADetalhe() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const location = useLocation()
   const skipConcept = searchParams.get('skipConcept') === 'true'
+  const resetConcept = searchParams.get('resetConcept') === 'true'
   
   const [fullscreenContent, setFullscreenContent] = useState(null)
   const [expandedMechanic, setExpandedMechanic] = useState(0) // Nenhum card expandido por padrão
@@ -26,6 +27,8 @@ function PropostaIADetalhe() {
     try {
       // Se skipConcept estiver na URL, pula o conceito
       if (skipConcept) return true
+      // Se resetConcept estiver na URL, força mostrar o conceito
+      if (resetConcept) return false
       return checkHasSeenConcept()
     } catch (error) {
       console.error('Erro ao verificar hasSeenConcept:', error)
@@ -53,6 +56,25 @@ function PropostaIADetalhe() {
       }
     }
   }, [skipConcept, currentSlide])
+
+  // Se resetConcept estiver na URL, força reset do conceito
+  useEffect(() => {
+    if (resetConcept) {
+      // Remove o flag do localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('hasSeenConcept')
+      }
+      // Força voltar para o slide 0
+      setCurrentSlide(0)
+      setHasSeenConcept(false)
+      // Remove o parâmetro da URL
+      const newSearchParams = new URLSearchParams(searchParams)
+      newSearchParams.delete('resetConcept')
+      setSearchParams(newSearchParams, { replace: true })
+      // Scroll para o topo
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  }, [resetConcept, searchParams, setSearchParams])
 
   useEffect(() => {
     // Smooth scroll para links de navegação
@@ -870,15 +892,12 @@ function PropostaIADetalhe() {
                     if (typeof window !== 'undefined') {
                       localStorage.removeItem('hasSeenConcept')
                     }
-                    // Sempre força reset do estado
-                    setCurrentSlide(0)
-                    setHasSeenConcept(false)
-                    // Scroll para o topo imediatamente
-                    window.scrollTo({ top: 0, behavior: 'auto' })
-                    // Se não estiver na página, navega também
-                    if (location.pathname !== '/propostas/8') {
-                      navigate('/propostas/8', { replace: false })
-                    }
+                    // Navega com parâmetro resetConcept para forçar reset
+                    navigate('/propostas/8?resetConcept=true', { replace: false })
+                    // Scroll para o topo após navegação
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'auto' })
+                    }, 100)
                   }}
                 >
                   Ver conceito de trabalho →
