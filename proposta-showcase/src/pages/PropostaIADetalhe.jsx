@@ -863,19 +863,26 @@ function PropostaIADetalhe() {
                 <strong>Relemos esse conceito para 2026: "Agentes se veem por aqui". Múltiplas formas, múltiplas telas, múltiplos agentes. A mensagem central: as formas de distribuir conteúdo evoluíram drasticamente, mas o conteúdo de qualidade continua sendo o DNA da Globo. IA expande as possibilidades de formato e alcance, não substitui a criação humana.</strong>
               </p>
               <div style={{ marginTop: '2rem' }}>
-                <Link
-                  to="/propostas/8"
+                <button
                   className="cta-button"
                   onClick={() => {
                     // Remove o flag do localStorage
                     if (typeof window !== 'undefined') {
                       localStorage.removeItem('hasSeenConcept')
                     }
+                    // Sempre força reset do estado
+                    setCurrentSlide(0)
+                    setHasSeenConcept(false)
+                    // Scroll para o topo imediatamente
+                    window.scrollTo({ top: 0, behavior: 'auto' })
+                    // Se não estiver na página, navega também
+                    if (location.pathname !== '/propostas/8') {
+                      navigate('/propostas/8', { replace: false })
+                    }
                   }}
-                  style={{ textDecoration: 'none', display: 'inline-block' }}
                 >
                   Ver conceito de trabalho →
-                </Link>
+                </button>
               </div>
             </div>
 
