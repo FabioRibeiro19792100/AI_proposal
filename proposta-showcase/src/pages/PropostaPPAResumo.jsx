@@ -103,6 +103,7 @@ const investimento = {
       titulo: 'Fase 5 - Imersão',
       valor: 'R$ 65.000,00',
       entregaveis: [
+        'Mediação e condução técnica durante a imersão',
         '3 propostas criativas finalizadas',
         'Documentação completa do processo',
         'Relatório final com métricas'

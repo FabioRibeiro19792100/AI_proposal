@@ -1211,6 +1211,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Equipes preparadas para o pitch
 
 **Fase 5 - Imersão (R$ 65.000,00):**
+- Mediação e condução técnica durante a imersão
 - 3 propostas criativas finalizadas
 - Documentação completa do processo
 - Relatório final com métricas
