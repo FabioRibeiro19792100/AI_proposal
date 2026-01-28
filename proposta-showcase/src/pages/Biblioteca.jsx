@@ -45,6 +45,10 @@ function Biblioteca() {
         <div className="biblioteca-header">
         </div>
 
+        <p className="biblioteca-disclaimer">
+          Esses materiais serviram de base para a elaboração das propostas apresentadas. São referências para consulta.
+        </p>
+
         {categorias.map((categoria) => {
           const docsCategoria = documentos.filter((doc) => doc.categoria === categoria)
           return (

@@ -1855,6 +1855,12 @@
   border-radius: 0;
 }
 
+.proposal-summary-table .table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -0.5rem;
+}
+
 .summary-table-title {
   margin-bottom: 1.5rem;
   color: #000000;
@@ -2015,6 +2021,26 @@
 
   .section {
     padding: 2rem 1rem;
+  }
+
+  .proposal-summary-table {
+    padding: 1rem;
+  }
+
+  .summary-table {
+    table-layout: auto;
+    min-width: 500px;
+    font-size: 0.8125rem;
+  }
+
+  .summary-table th,
+  .summary-table td {
+    padding: 0.6rem 0.5rem;
+    white-space: normal;
+  }
+
+  .summary-table-title {
+    font-size: 1.125rem;
   }
 
   .journey-timeline {

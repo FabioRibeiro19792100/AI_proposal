@@ -12,6 +12,20 @@
   margin-bottom: 2rem;
 }
 
+.biblioteca-disclaimer {
+  font-size: 1.125rem;
+  color: #000000;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
 .biblioteca-label {
   display: block;
   color: #000000;

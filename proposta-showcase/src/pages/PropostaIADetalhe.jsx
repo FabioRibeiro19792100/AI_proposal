@@ -1228,6 +1228,7 @@ function PropostaIADetalhe() {
           {/* Tabela Resumo - 5 Abordagens */}
           <div className="proposal-summary-table" style={{ marginTop: '4rem' }}>
             <h3 className="summary-table-title">Resumo das 5 Abordagens de Desafio</h3>
+            <div className="table-responsive">
             <table className="summary-table" style={{ tableLayout: 'fixed' }}>
               <thead>
                 <tr>
@@ -1270,6 +1271,7 @@ function PropostaIADetalhe() {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </section>
@@ -1457,6 +1459,7 @@ function PropostaIADetalhe() {
 
           <div className="proposal-summary-table">
             <h3 className="summary-table-title">Resumo das Fases</h3>
+            <div className="table-responsive">
             <table className="summary-table">
               <thead>
                 <tr>
@@ -1504,6 +1507,7 @@ function PropostaIADetalhe() {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </section>

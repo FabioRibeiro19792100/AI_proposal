@@ -26,3 +26,42 @@
 .home-nav-link:hover {
   color: #666666;
 }
+
+/* Intro antes do menu */
+.home-intro {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+  position: relative;
+}
+
+.home-intro-text {
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #000000;
+  margin: 0 0 0.75rem 0;
+}
+
+.home-intro-credits {
+  font-size: 0.8125rem;
+  font-weight: 300;
+  color: #666666;
+  margin: 0 0 2rem 0;
+}
+
+.home-intro-skip {
+  background: transparent;
+  border: 1px solid #000000;
+  color: #000000;
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.home-intro-skip:hover {
+  background: #000000;
+  color: #ffffff;
+}
