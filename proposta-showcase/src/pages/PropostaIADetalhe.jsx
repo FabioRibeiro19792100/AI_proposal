@@ -133,61 +133,35 @@ function PropostaIADetalhe() {
       console.error('Erro ao adicionar listeners:', error)
     }
 
-    // Auto-libera scroll quando chegar no Hero (slide 7 - último)
-    let finalTimer = null
-    if (currentSlide === 7) {
-      finalTimer = setTimeout(() => {
-        // Salva que já viu o conceito
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('hasSeenConcept', 'true')
-          setHasSeenConcept(true)
-        }
-        
-        // Muda para 8 para liberar scroll, mas o slide 7 permanece visível
-        // Não faz scroll adicional para evitar o "quique" - mantém no topo (0,0)
-        setCurrentSlide(8)
-      }, 2000)
-    }
-
-    // Quando currentSlide = 8, libera o scroll mas mantém o slide 7 visível
-    // Não força scroll para evitar o "coice"
-
-    // Bloquear scroll vertical durante storytelling horizontal
-    // Só adiciona listeners se estiver nos slides do storytelling (0-7)
+    // Bloquear scroll vertical durante storytelling horizontal (slides 0-7)
+    // Hero = slide 8, ao chegar lá o scroll é liberado
     if (currentSlide < 8) {
       try {
         const storytellingSection = document.querySelector('.storytelling-section')
         if (storytellingSection) {
           const handleWheel = (e) => {
             try {
-              if (currentSlide < 7) {
+              if (currentSlide < 8) {
                 e.preventDefault()
-                // Converter scroll vertical em navegação horizontal
                 if (e.deltaY > 0) {
-                  if (currentSlide === 6) {
-                    // Quando está no slide 6, vai para o Hero (slide 7)
-                    setCurrentSlide(7)
+                  if (currentSlide === 7) {
+                    setCurrentSlide(8)
+                    setHasSeenConcept(true)
+                    if (typeof window !== 'undefined') localStorage.setItem('hasSeenConcept', 'true')
                   } else {
-                    setCurrentSlide(prev => Math.min(prev + 1, 7))
+                    setCurrentSlide(prev => Math.min(prev + 1, 8))
                   }
                 } else if (e.deltaY < 0) {
                   setCurrentSlide(prev => Math.max(prev - 1, 0))
                 }
               }
-              // No slide 7 (Hero - último), bloqueia scroll até timer liberar
-              else if (currentSlide === 7) {
-                e.preventDefault()
-              }
             } catch (error) {
               console.error('Erro no handleWheel:', error)
             }
           }
-          
           storytellingSection.addEventListener('wheel', handleWheel, { passive: false })
-          
           return () => {
             try {
-              if (finalTimer) clearTimeout(finalTimer)
               storytellingSection.removeEventListener('wheel', handleWheel)
               document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.removeEventListener('click', handleClick)
@@ -203,7 +177,6 @@ function PropostaIADetalhe() {
     }
 
     return () => {
-      if (finalTimer) clearTimeout(finalTimer)
       document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.removeEventListener('click', handleClick)
       })
@@ -268,27 +241,8 @@ function PropostaIADetalhe() {
     }
   }, [currentSlide])
 
-  // Scroll para o topo quando entra no Hero (slide 7)
+  // Scroll para o topo quando entra no Hero (slide 8)
   useEffect(() => {
-    if (currentSlide === 7) {
-      // Ancorar no topo (0,0) quando entra no Hero - instantâneo para evitar quique
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'auto'
-      })
-      
-      // Garante que permanece no topo quando muda para 8
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'auto'
-        })
-      }, 100)
-    }
-    
-    // Quando muda para 8, mantém no topo sem scroll suave
     if (currentSlide === 8) {
       window.scrollTo({
         top: 0,
@@ -298,9 +252,9 @@ function PropostaIADetalhe() {
     }
   }, [currentSlide])
 
-  // Efeito máquina de escrever no hero (slide 7)
+  // Efeito máquina de escrever no hero (slide 8)
   useEffect(() => {
-    if (currentSlide !== 7) {
+    if (currentSlide !== 8) {
       setHeroTitleText('')
       setHeroSubtitleText('')
       setIsTypingHero(false)
@@ -427,7 +381,7 @@ function PropostaIADetalhe() {
         
         <div className="storytelling-container">
           {/* Setas de navegação elegantes */}
-          {currentSlide > 0 && currentSlide < 7 && (
+          {currentSlide > 0 && currentSlide < 8 && (
             <button 
               className="storytelling-arrow storytelling-arrow-left"
               onClick={() => setCurrentSlide(currentSlide - 1)}
@@ -438,13 +392,14 @@ function PropostaIADetalhe() {
               </svg>
             </button>
           )}
-          {currentSlide < 7 && (
+          {currentSlide < 8 && (
             <button 
               className="storytelling-arrow storytelling-arrow-right"
               onClick={() => {
-                if (currentSlide === 6) {
-                  // Quando está no slide 6, vai para o Hero (slide 7)
-                  setCurrentSlide(7)
+                if (currentSlide === 7) {
+                  setCurrentSlide(8)
+                  setHasSeenConcept(true)
+                  if (typeof window !== 'undefined') localStorage.setItem('hasSeenConcept', 'true')
                 } else {
                   setCurrentSlide(currentSlide + 1)
                 }
@@ -624,8 +579,37 @@ function PropostaIADetalhe() {
             </div>
           </div>
 
-          {/* Slide 7: Hero - permanece visível mesmo quando currentSlide = 8 */}
-          <div className={`storytelling-slide hero-slide ${currentSlide === 7 || currentSlide === 8 ? 'active' : ''}`}>
+          {/* Slide 7: Uma chamada que se abre - mote e camadas de comunicação */}
+          <div className={`storytelling-slide ${currentSlide === 7 ? 'active' : ''}`}>
+            <div className="storytelling-content">
+              <div className="slide-mote-abertura">
+                <div className="slide-mote-abertura-col">
+                  <p className="contexto-teto-texto">
+                    "Agentes se veem por aqui" foi criado para gerar interesse e curiosidade como primeiro passo, dialogando também com o momento em que agentes de IA entram em uso cotidiano.
+                  </p>
+                </div>
+                <div className="slide-mote-abertura-col">
+                  <p className="contexto-teto-texto">
+                    O conceito vai ser acompanhado de uma tagline que sinaliza que existe um desafio de IA patrocinado pela Globo, mas deixa a explicação completa para depois.
+                  </p>
+                  <p className="contexto-teto-texto">
+                    Revelar de cara a combinação entre IA, conteúdo e uma grande empresa de comunicação pode levar a interpretações precipitadas, antes que as pessoas entendam do que realmente se trata.
+                  </p>
+                </div>
+                <div className="slide-mote-abertura-col">
+                  <p className="contexto-teto-texto">
+                    Quem se interessa avança para camadas de comunicação mais precisas, onde recebe informações completas sobre o escopo da iniciativa e o uso de IA aplicado ao conteúdo.
+                  </p>
+                  <p className="contexto-teto-texto">
+                    Isso permite que as pessoas avaliem o projeto pelo que ele é, não pelo que imaginam que seja.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slide 8: Hero - permanece visível quando currentSlide = 8 */}
+          <div className={`storytelling-slide hero-slide ${currentSlide === 8 ? 'active' : ''}`}>
             <div className="storytelling-content">
               <div className="hero-content">
                 <h1 className="hero-title" style={{ marginBottom: '2rem' }}>
@@ -661,13 +645,14 @@ function PropostaIADetalhe() {
                     </>
                   )}
                 </p>
-                {/* Seta indicando que a navegação continua para baixo - só aparece no slide 6 */}
-                {currentSlide === 6 && (
+                {/* Seta indicando que a navegação continua para baixo - só aparece no slide 7 (último de conteúdo antes do hero) */}
+                {currentSlide === 7 && (
                   <button 
                     className="scroll-down-indicator"
                     onClick={() => {
-                      setCurrentSlide(7)
-                      // Aguarda um pouco e faz scroll suave para a navegação principal
+                      setCurrentSlide(8)
+                      setHasSeenConcept(true)
+                      if (typeof window !== 'undefined') localStorage.setItem('hasSeenConcept', 'true')
                       setTimeout(() => {
                         const nav = document.querySelector('.ia-nav')
                         if (nav) {
@@ -702,7 +687,7 @@ function PropostaIADetalhe() {
           </div>
 
           {/* Indicadores de navegação (bolinhas) */}
-          {currentSlide < 7 && (
+          {currentSlide < 8 && (
             <div className="storytelling-indicators">
               {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
                 <button
@@ -1302,8 +1287,6 @@ function PropostaIADetalhe() {
               <div className="phase-deliverables">
                 <h4>Entregas Principais:</h4>
                 <ul>
-                  <li>Definição de categorias ou desafios específicos</li>
-                  <li>Framework de avaliação (matriz de riscos com critérios claros de aprovação) - será usado durante a análise das ideias recebidas</li>
                   <li>Diretrizes de comunicação e mitigação de riscos</li>
                   <li>Documento de Definição do Desafio (aprovado pela Globo)</li>
                 </ul>
@@ -1325,9 +1308,8 @@ function PropostaIADetalhe() {
               <div className="phase-deliverables">
                 <h4>Entregas Principais:</h4>
                 <ul>
-                  <li>Plataforma de submissão funcional</li>
-                  <li>Base de dados de propostas validadas</li>
-                  <li>Relatório de distribuição por categoria</li>
+                  <li>Plataforma de submissão funcional (regulamento e design de formulário)</li>
+                  <li>Submissões validadas, analisadas e classificadas</li>
                   <li>Lista de 30 finalistas</li>
                 </ul>
               </div>
@@ -1410,6 +1392,7 @@ function PropostaIADetalhe() {
                 <div>
                   <span className="phase-number">4</span>
                   <h3 className="phase-title">Implementação (Opcional)</h3>
+                  <p className="phase-responsabilidade">Responsabilidade técnica da Globo.</p>
                 </div>
                 <div className="phase-duration">12 semanas</div>
               </div>

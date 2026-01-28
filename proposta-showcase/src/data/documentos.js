@@ -309,6 +309,7 @@ export const prosContrasContent = `# Quadro Comparativo: Mecânicas Possíveis p
 - Seleção: Top 5 para implementação piloto
 
 **FASE 3 (OPCIONAL): "Implementação"**
+*Responsabilidade técnica da Globo.*
 - Duração: 3 meses
 - Formato: Parceria remunerada
 - Entregável: Solução em produção
@@ -871,7 +872,7 @@ As 10 equipes participam de uma mentoria online e exclusiva com a Master para ap
 As equipes defendem suas propostas de campanha para uma banca Globo. Ao final, serão escolhidas 03 equipes para aprimorar o planejamento + imersão.
 
 ### 6. Encontros + Imersão
-As equipes selecionadas participam de uma 04 encontros prévios e online para detalhar todo o processo e seguem para imersão na Globo SP para finalizar a proposta criativa.
+As equipes selecionadas participam de encontros prévios e online para detalhar todo o processo e seguem para imersão na Globo RJ para finalizar a proposta criativa.
 
 ### 7. Avaliação do Júri
 As 03 propostas criativas produzidas durante a imersão são encaminhadas e avaliadas pelo júri do PPA. A ideia escolhida é desenvolvida pela Globo.
@@ -912,7 +913,7 @@ Início da avaliação pelos pareceristas
 Seleção das 10 duplas
 
 **Junho**  
-Imersão Master Globo SP + Pitch Final
+Imersão Master Globo RJ + Pitch Final
 
 **Julho a Setembro**  
 Desenvolvimento da Campanha pela dupla  
@@ -962,7 +963,7 @@ export const propostaPPAContent = `
 
 ## Objetivo
 
-Esta proposta apresenta a atuação da Mastertech na operacionalização dos **6 primeiros pontos da mecânica do Desafio PPA**, desde a convocatória nacional até a imersão presencial na Globo SP.
+Esta proposta apresenta a atuação da Mastertech na operacionalização dos **6 primeiros pontos da mecânica do Desafio PPA**, desde a convocatória nacional até a imersão presencial na Globo RJ.
 
 A Mastertech será responsável por conduzir todo o processo formativo e seletivo, entregando 3 equipes finalistas prontas para a avaliação do júri do PPA (pontos 7 e 8, de responsabilidade da Globo).
 
@@ -981,7 +982,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 | **3** | Seleção Inicial | Organização da banca, consolidação de avaliações, seleção das 10 equipes |
 | **4** | Mentoria Master Globo | Condução de mentoria online exclusiva para as 10 equipes selecionadas |
 | **5** | Pitch | Estruturação e coordenação do pitch, seleção das 3 equipes finalistas |
-| **6** | Encontros + Imersão | Coordenação de 4 encontros online + organização da imersão presencial na Globo SP |
+| **6** | Encontros + Imersão | Coordenação de encontros online + organização da imersão presencial na Globo RJ |
 
 **Pontos 7 e 8** (Avaliação do Júri e Desenvolvimento) são de responsabilidade da Globo.
 
@@ -996,15 +997,12 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 **Atividades da Mastertech:**
 
-- Desenvolvimento e lançamento da plataforma de inscrições
-- Gestão de comunicação e divulgação do edital
+- Customização (design) do formulário de inscrições
+- Ajustes no edital e no regulamento
 - Suporte às equipes durante o período de inscrições
-- Validação de elegibilidade (equipes de até 3 estudantes + professor mentor)
-- Consolidação de todas as submissões recebidas
+- Validação de elegibilidade
 
 **Entregáveis:**
-- Plataforma de inscrições funcional e responsiva
-- Base de dados completa de inscrições validadas
 - Relatório de inscrições (quantidade, distribuição geográfica, perfil das equipes)
 
 ---
@@ -1029,8 +1027,8 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Alinhamento com o tema do edital
 
 **Entregáveis:**
-- Processo de avaliação documentado e executado
-- Lista das 10 equipes selecionadas
+- Processo de avaliação documentado e executado (critérios e rastreabilidade)
+- Seleção e divulgação das 10 equipes semifinalistas
 - Relatório executivo da seleção inicial
 
 ---
@@ -1091,19 +1089,19 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 ### Fase 5: Encontros Prévios + Imersão
 
-**Duração:** 6 semanas (4 semanas de encontros + 2 semanas de imersão)  
-**Objetivo:** Preparar e executar a imersão presencial na Globo SP
+**Duração:** 6 semanas (encontros online + imersão presencial, duração a confirmar)  
+**Objetivo:** Preparar e executar a imersão presencial na Globo RJ
 
 **Atividades da Mastertech:**
 
 **Encontros Prévios (4 semanas):**
-- 4 encontros online para detalhar todo o processo
+- Encontros online para detalhar todo o processo
 - Alinhamento de expectativas e cronograma
 - Preparação técnica e criativa para a imersão
 - Definição de entregáveis e prazos
 
-**Imersão Presencial (2 semanas):**
-- Coordenação logística da imersão na Globo SP
+**Imersão Presencial:**
+- Coordenação logística da imersão na Globo RJ
 - Facilitação dos encontros presenciais
 - Acompanhamento do desenvolvimento das propostas criativas
 - Suporte técnico e criativo às equipes
@@ -1139,53 +1137,16 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 ---
 
-## Infraestrutura e Tecnologia
-
-### Plataforma de Inscrições
-
-- Sistema web responsivo e acessível
-- Formulário de inscrição com upload de arquivos (material criativo, roteiros)
-- Área do participante para acompanhamento do processo
-- Painel administrativo para gestão completa
-- Sistema de notificações automáticas
-
-### Sistema de Gestão
-
-- Base de dados centralizada de todas as equipes
-- Workflow de avaliação configurável
-- Dashboard de acompanhamento em tempo real
-- Geração de relatórios automatizados
-- Integração com ferramentas de comunicação
-
-### Ambiente de Mentoria
-
-- Plataforma de videoconferência (Zoom/Teams)
-- Espaço colaborativo online para desenvolvimento
-- Biblioteca de recursos e materiais de apoio
-- Sistema de acompanhamento de entregas
-
-### Segurança e Conformidade
-
-- Proteção de dados pessoais (LGPD)
-- Backup e recuperação de dados
-- Controle de acesso e permissões
-- Auditoria de ações no sistema
-- Conformidade com diretrizes de segurança da Globo
-
----
-
 ## Diferenciais da Mastertech
 
 ### Experiência Comprovada
 
 - Histórico em gestão de processos seletivos de grande escala (Desafio LED, Academia LED)
-- Expertise em desenvolvimento de plataformas de submissão
 - Conhecimento em facilitação de processos criativos e formativos
 
 ### Capacidade Técnica
 
 - Equipe multidisciplinar (desenvolvimento, design, comunicação, gestão)
-- Infraestrutura tecnológica própria
 - Metodologias ágeis e iterativas
 - Experiência em mentoria e desenvolvimento de talentos
 
@@ -1203,28 +1164,27 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 ### DETALHAMENTO DAS ENTREGAS:
 
 **Fases 1, 2 e 4 (R$ 43.500,00):**
-- Plataforma de inscrições funcional e responsiva
-- Base de dados completa de inscrições validadas
-- Processo de avaliação documentado
-- Seleção das 10 equipes
-- Pitch e seleção das 3 finalistas
+- Documentar e executar o processo de avaliação das inscrições
+- Selecionar e divulgar as 10 equipes semifinalistas
+- Conduzir o pitch e selecionar as 3 equipes finalistas
 
 **Fase 3 - Mentoria (R$ 21.000,00):**
 - 10 campanhas aprimoradas e documentadas
 - Roteiros revisados e otimizados
 - Equipes preparadas para o pitch
 
-**Fase 5 - Imersão (R$ 65.000,00):**
+**Fase 5 - Imersão (R$ 40.000,00):**
 - Mediação e condução técnica durante a imersão
 - Documentação completa do processo
 - Relatório final com métricas
+- *Preço estimado para imersão técnica de 3 a 5 dias.*
 
 **Infraestrutura:**
 - Microsoft Forms ou Typeform
 - Sistemas de análise de submissões
 - Plataforma de gestão
 
-**Total: R$ 129.500,00**
+**Total: R$ 104.500,00**
 
 ### Forma de Pagamento
 
@@ -1316,7 +1276,6 @@ Construir, em conjunto com a Globo, os fundamentos do desafio através de um pro
 - Workshop colaborativo com equipe Globo
 
 #### 2.2.3 Definição de Recorte Temático (2 semanas)
-- Definição de categorias ou desafios específicos
 - Recorte temático que evita áreas sensíveis
 - Definição de guardrails e critérios de elegibilidade
 - Alinhamento com objetivos estratégicos da Globo
@@ -1338,7 +1297,6 @@ Construir, em conjunto com a Globo, os fundamentos do desafio através de um pro
 - Conceito do desafio e tema definidos
 - Recorte temático aprovado
 - Mecânica detalhada e validada
-- Framework de avaliação
 - Diretrizes de comunicação
 - Cronograma de execução
 - Orçamento detalhado
@@ -1564,14 +1522,12 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 - Análise de hipóteses de abordagem
 - Documento de recorte temático aprovado
 - Mecânica detalhada e validada
-- Framework de avaliação
 - Diretrizes de comunicação
 - **Documento de Definição do Desafio (aprovado)**
 
 **Fase 1:**
-- Plataforma de submissão funcional
-- Base de dados de propostas validadas
-- Relatório de distribuição por categoria
+- Plataforma de submissão funcional (regulamento e design de formulário)
+- Submissões validadas, analisadas e classificadas
 - Lista de 30 finalistas
 
 **Fase 2:**
@@ -1738,7 +1694,6 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 
 ### 13.3 Capacidade Técnica
 - Equipe multidisciplinar
-- Infraestrutura tecnológica própria
 - Metodologias ágeis e iterativas
 
 ### 13.4 Alinhamento com Valores

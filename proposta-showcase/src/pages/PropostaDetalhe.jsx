@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useMemo, useState, useEffect } from 'react'
 import { propostaPPAContent, propostaIAContent } from '../data/documentos'
+import { DiferenciaisSection } from '../components/DiferenciaisSection'
 import '../styles/PropostaDetalhe.css'
 
 // Dados das propostas
@@ -418,8 +419,10 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
         if (phaseGroups) {
           // Renderiza tabela simplificada por fase
           const total = Object.values(phaseGroups).reduce((sum, value) => sum + value, 0)
+          const tk = tableKey++
           elements.push(
-            <table key={`table-${tableKey++}`} className="proposta-table investment-table investment-simplified">
+            <div key={`table-wrap-${tk}`} className="table-responsive">
+            <table key={`table-${tk}`} className="proposta-table investment-table investment-simplified">
               <thead>
                 <tr>
                   <th>Fase</th>
@@ -439,6 +442,7 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
                 </tr>
               </tbody>
             </table>
+            </div>
           )
         } else {
           // Renderiza tabela normal
@@ -466,10 +470,12 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
               </div>
             )
           } else {
+            const tk2 = tableKey++
+            const isAtuacaoTable = colCount === 3 && (tableHeaders[0] || '').includes('Ponto') && (tableHeaders[1] || '').includes('Atividade')
             elements.push(
+              <div key={`table-wrap-${tk2}`} className="table-responsive">
               <table 
-                key={`table-${tableKey++}`} 
-                className={`proposta-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${isMentoriaTable ? 'mentoria-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
+                className={`proposta-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${isMentoriaTable ? 'mentoria-table' : ''} ${colCount > 4 ? 'wide-table' : ''} ${isAtuacaoTable ? 'atuacao-table' : ''}`}
               >
                 <thead>
                   <tr>
@@ -481,8 +487,10 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
                 <tbody>
                   {currentTable.map((row, rIndex) => {
                     const firstCell = row[0] || ''
+                    const secondCell = row[1] || ''
                     // Aplica lógica de grupo APENAS para tabela de investimento
                     const isGroupRow = isInvestment && firstCell.trim().startsWith('**') && firstCell.trim().endsWith('**') && !firstCell.toLowerCase().includes('total')
+                    const isMentoriaRow = secondCell.includes('Mentoria Master Globo')
                     const headerCount = tableHeaders.slice(0, isMentoriaTable ? 4 : tableHeaders.length).length
                     const maxCells = isMentoriaTable ? 4 : headerCount
                     const cellsToRender = row.slice(0, maxCells)
@@ -496,7 +504,15 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
                           <td colSpan={headerCount}>{formatInlineMarkdown(row[0])}</td>
                         ) : (
                           cellsToRender.slice(0, headerCount).map((cell, cIndex) => (
-                            <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
+                            <td key={cIndex}>
+                              {formatInlineMarkdown(cell)}
+                              {cIndex === 2 && isMentoriaRow && (
+                                <>
+                                  <br />
+                                  <span className="duvida-text-celula">Responsabilidade a confirmar (Mastertech ou Globo)</span>
+                                </>
+                              )}
+                            </td>
                           ))
                         )}
                       </tr>
@@ -504,26 +520,30 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
                   })}
                 </tbody>
               </table>
+              </div>
             )
           }
         }
       } else if (currentTable.length > 0) {
         const colCount = currentTable[0]?.length || 0
+        const tk3 = tableKey++
         elements.push(
-          <table 
-            key={`table-${tableKey++}`} 
-            className={`proposta-table ${colCount > 4 ? 'wide-table' : ''}`}
-          >
-            <tbody>
-              {currentTable.map((row, rIndex) => (
-                <tr key={rIndex}>
-                  {row.map((cell, cIndex) => (
-                    <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div key={`table-wrap-${tk3}`} className="table-responsive">
+            <table 
+              key={`table-${tk3}`}
+              className={`proposta-table ${colCount > 4 ? 'wide-table' : ''}`}
+            >
+              <tbody>
+                {currentTable.map((row, rIndex) => (
+                  <tr key={rIndex}>
+                    {row.map((cell, cIndex) => (
+                      <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )
       }
       inTable = false
@@ -685,8 +705,10 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
       
       if (phaseGroups) {
         const total = Object.values(phaseGroups).reduce((sum, value) => sum + value, 0)
+        const tkF = tableKey++
         elements.push(
-          <table key={`table-${tableKey++}`} className="proposta-table investment-table investment-simplified">
+          <div key={`table-wrap-${tkF}`} className="table-responsive">
+          <table key={`table-${tkF}`} className="proposta-table investment-table investment-simplified">
             <thead>
               <tr>
                 <th>Fase</th>
@@ -706,6 +728,7 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
               </tr>
             </tbody>
           </table>
+          </div>
         )
       } else {
         const isTimeline = tableHeaders.some(h => 
@@ -748,10 +771,12 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
             </div>
           )
         } else {
+          const tkF2 = tableKey++
+          const isAtuacaoTable = colCount === 3 && (tableHeaders[0] || '').includes('Ponto') && (tableHeaders[1] || '').includes('Atividade')
           elements.push(
+            <div key={`table-wrap-${tkF2}`} className="table-responsive">
             <table 
-              key={`table-${tableKey++}`} 
-              className={`proposta-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${isMentoriaTable ? 'mentoria-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
+              className={`proposta-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${isMentoriaTable ? 'mentoria-table' : ''} ${colCount > 4 ? 'wide-table' : ''} ${isAtuacaoTable ? 'atuacao-table' : ''}`}
             >
               <thead>
                 <tr>
@@ -763,8 +788,10 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
               <tbody>
                 {currentTable.map((row, rIndex) => {
                   const firstCell = row[0] || ''
+                  const secondCell = row[1] || ''
                   // Aplica lógica de grupo APENAS para tabela de investimento
                   const isGroupRow = isInvestment && firstCell.trim().startsWith('**') && firstCell.trim().endsWith('**') && !firstCell.toLowerCase().includes('total')
+                  const isMentoriaRow = secondCell.includes('Mentoria Master Globo')
                   const headerCount = tableHeaders.slice(0, isMentoriaTable ? 4 : tableHeaders.length).length
                   const maxCells = isMentoriaTable ? 4 : headerCount
                   const cellsToRender = row.slice(0, maxCells)
@@ -778,22 +805,32 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
                         <td colSpan={headerCount}>{formatInlineMarkdown(row[0])}</td>
                       ) : (
                         cellsToRender.slice(0, headerCount).map((cell, cIndex) => (
-                          <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
+                          <td key={cIndex}>
+                            {formatInlineMarkdown(cell)}
+                            {cIndex === 2 && isMentoriaRow && (
+                              <>
+                                <br />
+                                <span className="duvida-text-celula">Responsabilidade a confirmar (Mastertech ou Globo)</span>
+                              </>
+                            )}
+                          </td>
                         ))
                       )}
                     </tr>
                   )
                 })}
-              </tbody>
-            </table>
-          )
-        }
+            </tbody>
+          </table>
+          </div>
+        )
       }
-    } else if (currentTable.length > 0) {
+    }
+  } else if (currentTable.length > 0) {
       const colCount = currentTable[0]?.length || 0
+      const tkF3 = tableKey++
       elements.push(
+        <div key={`table-wrap-${tkF3}`} className="table-responsive">
         <table 
-          key={`table-${tableKey++}`} 
           className={`proposta-table ${colCount > 4 ? 'wide-table' : ''}`}
         >
           <tbody>
@@ -806,6 +843,7 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
             ))}
           </tbody>
         </table>
+        </div>
       )
     }
   }
@@ -826,11 +864,9 @@ function renderInvestmentSection(content) {
         titulo: 'Fases 1, 2 e 4',
         valor: 'R$ 43.500,00',
         entregaveis: [
-          'Plataforma de inscrições funcional e responsiva',
-          'Base de dados completa de inscrições validadas',
-          'Processo de avaliação documentado',
-          'Seleção das 10 equipes',
-          'Pitch e seleção das 3 finalistas'
+          'Documentar e executar o processo de avaliação das inscrições',
+          'Selecionar e divulgar as 10 equipes semifinalistas',
+          'Conduzir o pitch e selecionar as 3 equipes finalistas'
         ]
       },
       {
@@ -845,12 +881,13 @@ function renderInvestmentSection(content) {
       },
       {
         titulo: 'Fase 5 - Imersão',
-        valor: 'R$ 65.000,00',
+        valor: 'R$ 40.000,00',
         entregaveis: [
           'Mediação e condução técnica durante a imersão',
           'Documentação completa do processo',
           'Relatório final com métricas'
-        ]
+        ],
+        nota: 'Preço estimado para imersão técnica de 3 a 5 dias.'
       },
       {
         titulo: 'Infraestrutura',
@@ -862,7 +899,7 @@ function renderInvestmentSection(content) {
         ]
       }
     ],
-    total: 'R$ 129.500,00',
+    total: 'R$ 104.500,00',
     pagamento: [
       { percent: '30', desc: 'Assinatura do contrato' },
       { percent: '30', desc: 'Início Fase 3 (Mentoria)' },
@@ -877,21 +914,13 @@ function renderInvestmentSection(content) {
       <div className="investimento-resumo">
         <div className="investimento-descricao">
           <p>
-            O investimento garante a entrega completa do desafio: desde a descoberta e seleção 
-            de talentos em todo o Brasil, passando por um processo formativo exclusivo que 
-            aprimora as campanhas das equipes, até a produção final de 3 propostas criativas prontas 
-            para o júri PPA.
-          </p>
-          <p>
-            Inclui toda a operacionalização (plataforma, mentoria, 
-            pitch e imersão presencial), garantindo um processo transparente e de excelência 
-            que conecta a Globo aos melhores talentos de publicidade do país.
+            O investimento garante a entrega completa do desafio, incluindo a operacionalização do processo, com criação do regulamento, customização dos formulários de inscrição, avaliação das submissões, condução das mentorias, organização e condução do pitch com banca avaliadora e mediação da imersão presencial.
           </p>
         </div>
         <div className="investimento-total">
           <span>Total</span>
           <strong>{investimento.total}</strong>
-          <span className="investimento-sem-mentorias">sem considerar as mentorias: R$ 108.500,00</span>
+          <span className="investimento-sem-mentorias">sem considerar as mentorias: R$ 83.500,00</span>
         </div>
       </div>
 
@@ -922,6 +951,9 @@ function renderInvestmentSection(content) {
                 <li key={i}>{entregavel}</li>
               ))}
             </ul>
+            {item.nota && (
+              <p className="detalhamento-nota-imersao">{item.nota}</p>
+            )}
           </div>
         ))}
       </div>
@@ -942,7 +974,7 @@ function renderInvestmentSection(content) {
 }
 
 // Componente de Acordeon
-function AccordionSection({ title, content, isOpen, onToggle, sectionKey, isEntregaveis = false, propostaId }) {
+function AccordionSection({ title, content, isOpen, onToggle, sectionKey, isEntregaveis = false, propostaId, customContent }) {
   // Se for a seção de investimento da proposta PPA, renderiza customizado
   if (propostaId === '7' && title === 'Investimento e Precificação' && isOpen) {
     return (
@@ -963,6 +995,8 @@ function AccordionSection({ title, content, isOpen, onToggle, sectionKey, isEntr
       </div>
     )
   }
+
+  const bodyContent = customContent != null ? customContent : renderSectionContent(content, sectionKey, isEntregaveis)
   
   return (
     <div className="accordion-section">
@@ -976,7 +1010,7 @@ function AccordionSection({ title, content, isOpen, onToggle, sectionKey, isEntr
       </button>
       {isOpen && (
         <div className="accordion-content">
-          {renderSectionContent(content, sectionKey, isEntregaveis)}
+          {bodyContent}
         </div>
       )}
     </div>
@@ -1122,6 +1156,9 @@ function PropostaDetalhe() {
             }
             
             if (section.type === 'accordion') {
+              const customContent = section.title === 'Diferenciais da Mastertech'
+                ? <DiferenciaisSection showTitle={false} />
+                : undefined
               return (
                 <AccordionSection
                   key={`accordion-${idx}`}
@@ -1132,6 +1169,7 @@ function PropostaDetalhe() {
                   sectionKey={`section-${idx}`}
                   isEntregaveis={section.isEntregaveis}
                   propostaId={id}
+                  customContent={customContent}
                 />
               )
             }

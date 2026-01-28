@@ -158,11 +158,13 @@ function renderContent(content, keyPrefix) {
           h.toLowerCase().includes('preço')
         )
         const colCount = tableHeaders.length
+        const isAtuacaoTable = colCount === 3 && (tableHeaders[0] || '').includes('Ponto') && (tableHeaders[1] || '').includes('Atividade')
         
+        const tk = tableKey++
         const tableElement = (
           <table 
-            key={`table-${tableKey++}`} 
-            className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
+            key={`table-${tk}`} 
+            className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''} ${isAtuacaoTable ? 'atuacao-table' : ''}`}
           >
             <thead>
               <tr>
@@ -172,22 +174,34 @@ function renderContent(content, keyPrefix) {
               </tr>
             </thead>
             <tbody>
-              {currentTable.map((row, rIndex) => (
-                <tr key={rIndex}>
-                  {row.map((cell, cIndex) => (
-                    <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
-                  ))}
-                </tr>
-              ))}
+              {currentTable.map((row, rIndex) => {
+                const isMentoriaRow = (row[1] || '').includes('Mentoria Master Globo')
+                return (
+                  <tr key={rIndex}>
+                    {row.map((cell, cIndex) => (
+                      <td key={cIndex}>
+                        {formatInlineMarkdown(cell)}
+                        {cIndex === 2 && isMentoriaRow && (
+                          <>
+                            <br />
+                            <span className="duvida-text-celula">Responsabilidade a confirmar (Mastertech ou Globo)</span>
+                          </>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         )
-        addElement(tableElement)
+        addElement(<div key={`table-wrap-${tk}`} className="table-responsive">{tableElement}</div>)
       } else if (currentTable.length > 0) {
         const colCount = currentTable[0]?.length || 0
+        const tk2 = tableKey++
         const tableElement = (
           <table 
-            key={`table-${tableKey++}`} 
+            key={`table-${tk2}`} 
             className={`documento-table ${colCount > 4 ? 'wide-table' : ''}`}
           >
             <tbody>
@@ -201,7 +215,7 @@ function renderContent(content, keyPrefix) {
             </tbody>
           </table>
         )
-        addElement(tableElement)
+        addElement(<div key={`table-wrap-${tk2}`} className="table-responsive">{tableElement}</div>)
       }
       inTable = false
       currentTable = []
@@ -491,11 +505,13 @@ function renderContent(content, keyPrefix) {
         h.toLowerCase().includes('preço')
       )
       const colCount = tableHeaders.length
+      const isAtuacaoTable = colCount === 3 && (tableHeaders[0] || '').includes('Ponto') && (tableHeaders[1] || '').includes('Atividade')
       
+      const tk3 = tableKey++
       const tableElement = (
         <table 
-          key={`table-${tableKey++}`} 
-          className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''}`}
+          key={`table-${tk3}`} 
+          className={`documento-table ${isTimeline ? 'timeline-table' : ''} ${isInvestment ? 'investment-table' : ''} ${colCount > 4 ? 'wide-table' : ''} ${isAtuacaoTable ? 'atuacao-table' : ''}`}
         >
           <thead>
             <tr>
@@ -505,22 +521,34 @@ function renderContent(content, keyPrefix) {
             </tr>
           </thead>
           <tbody>
-            {currentTable.map((row, rIndex) => (
-              <tr key={rIndex}>
-                {row.map((cell, cIndex) => (
-                  <td key={cIndex}>{formatInlineMarkdown(cell)}</td>
-                ))}
-              </tr>
-            ))}
+            {currentTable.map((row, rIndex) => {
+              const isMentoriaRow = (row[1] || '').includes('Mentoria Master Globo')
+              return (
+                <tr key={rIndex}>
+                  {row.map((cell, cIndex) => (
+                    <td key={cIndex}>
+                      {formatInlineMarkdown(cell)}
+                      {cIndex === 2 && isMentoriaRow && (
+                        <>
+                          <br />
+                          <span className="duvida-text-celula">Responsabilidade a confirmar (Mastertech ou Globo)</span>
+                        </>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       )
-      addElement(tableElement)
+      addElement(<div key={`table-wrap-${tk3}`} className="table-responsive">{tableElement}</div>)
       } else if (currentTable.length > 0) {
         const colCount = currentTable[0]?.length || 0
+        const tk4 = tableKey++
         const tableElement = (
           <table 
-            key={`table-${tableKey++}`} 
+            key={`table-${tk4}`} 
             className={`documento-table ${colCount > 4 ? 'wide-table' : ''}`}
           >
             <tbody>
@@ -534,7 +562,7 @@ function renderContent(content, keyPrefix) {
             </tbody>
           </table>
         )
-        addElement(tableElement)
+        addElement(<div key={`table-wrap-${tk4}`} className="table-responsive">{tableElement}</div>)
       }
   }
 

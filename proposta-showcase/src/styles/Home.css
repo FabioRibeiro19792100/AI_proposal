@@ -65,3 +65,41 @@
   background: #000000;
   color: #ffffff;
 }
+
+@media (max-width: 1024px) {
+  .home {
+    padding: 3rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 2rem 1.5rem;
+  }
+
+  .home-intro-text {
+    font-size: 1.125rem;
+  }
+
+  .home-nav-link {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 1.5rem 1rem;
+  }
+
+  .home-intro-text {
+    font-size: 1rem;
+  }
+
+  .home-intro-credits {
+    font-size: 0.75rem;
+  }
+
+  .home-nav-link {
+    font-size: 1.125rem;
+  }
+}

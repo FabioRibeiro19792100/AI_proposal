@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import { DiferenciaisSection } from '../components/DiferenciaisSection'
 import '../styles/PropostaPPAResumo.css'
 
 const fases = [
@@ -10,12 +11,12 @@ const fases = [
     periodo: 'Abril 2026',
     descricao: 'Lançar edital nacional e coletar inscrições de equipes de publicidade',
     atividades: [
-      'Plataforma de inscrições',
-      'Gestão de comunicação',
-      'Suporte às equipes',
+      'Customização (design) do formulário de inscrições',
+      'Ajustes no edital e no regulamento',
+      'Suporte às equipes durante o período de inscrições',
       'Validação de elegibilidade'
     ],
-    entregavel: 'Plataforma funcional, base de dados completa de inscrições validadas e relatório com perfil das equipes e distribuição geográfica'
+    entregavel: 'Relatório de inscrições (quantidade, distribuição geográfica, perfil das equipes)'
   },
   {
     numero: '02',
@@ -29,7 +30,7 @@ const fases = [
       'Consolidação de resultados',
       'Comunicação transparente'
     ],
-    entregavel: 'Processo de avaliação documentado, lista das 10 equipes selecionadas e relatório executivo da seleção inicial'
+    entregavel: 'Processo de avaliação documentado e executado, seleção e divulgação das 10 equipes semifinalistas e relatório executivo da seleção inicial'
   },
   {
     numero: '03',
@@ -65,10 +66,10 @@ const fases = [
     titulo: 'Encontros + Imersão',
     duracao: '6 semanas',
     periodo: 'Julho-Setembro 2026',
-    descricao: 'Preparar e executar a imersão presencial na Globo SP',
+    descricao: 'Preparar e executar a imersão presencial na Globo RJ',
     atividades: [
-      '4 encontros online prévios',
-      'Imersão presencial 2 semanas',
+      'Encontros online prévios',
+      'Imersão presencial (duração a confirmar)',
       'Desenvolvimento de propostas criativas',
       'Finalização e entrega'
     ],
@@ -82,11 +83,9 @@ const investimento = {
       titulo: 'Fases 1, 2 e 4',
       valor: 'R$ 43.500,00',
       entregaveis: [
-        'Plataforma de inscrições funcional e responsiva',
-        'Base de dados completa de inscrições validadas',
-        'Processo de avaliação documentado',
-        'Seleção das 10 equipes',
-        'Pitch e seleção das 3 finalistas'
+        'Documentar e executar o processo de avaliação das inscrições',
+        'Selecionar e divulgar as 10 equipes semifinalistas',
+        'Conduzir o pitch e selecionar as 3 equipes finalistas'
       ]
     },
     {
@@ -101,12 +100,13 @@ const investimento = {
     },
     {
       titulo: 'Fase 5 - Imersão',
-      valor: 'R$ 65.000,00',
+      valor: 'R$ 40.000,00',
       entregaveis: [
         'Mediação e condução técnica durante a imersão',
         'Documentação completa do processo',
         'Relatório final com métricas'
-      ]
+      ],
+      nota: 'Preço estimado para imersão técnica de 3 a 5 dias.'
     },
     {
       titulo: 'Infraestrutura',
@@ -118,47 +118,8 @@ const investimento = {
       ]
     }
   ],
-  total: 'R$ 129.500,00'
+  total: 'R$ 104.500,00'
 }
-
-// Ícones SVG minimalistas e elegantes
-const IconExperiencia = () => (
-  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-  </svg>
-)
-
-const IconTecnica = () => (
-  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-  </svg>
-)
-
-const IconResultados = () => (
-  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-  </svg>
-)
-
-const diferenciais = [
-  {
-    icone: <IconExperiencia />,
-    titulo: 'Experiência Comprovada',
-    descricao: 'Histórico em gestão de processos seletivos de grande escala (Desafio LED, Academia LED)'
-  },
-  {
-    icone: <IconTecnica />,
-    titulo: 'Capacidade Técnica',
-    descricao: 'Equipe multidisciplinar, infraestrutura própria e metodologias ágeis'
-  },
-  {
-    icone: <IconResultados />,
-    titulo: 'Foco em Resultados',
-    descricao: 'Compromisso com transparência, justiça e valorização da educação'
-  }
-]
 
 function PropostaPPAResumo() {
   // Ancorar no topo quando a página carrega
@@ -190,7 +151,7 @@ function PropostaPPAResumo() {
           <h1>Desafio PPA</h1>
           <p className="subtitulo">
             Operacionalização dos 6 primeiros pontos da mecânica do Desafio PPA, 
-            desde a convocatória nacional até a imersão presencial na Globo SP
+            desde a convocatória nacional até a imersão presencial na Globo RJ
           </p>
         </div>
       </div>
@@ -279,15 +240,7 @@ function PropostaPPAResumo() {
         <div className="investimento-resumo">
           <div className="investimento-descricao">
             <p>
-              O investimento garante a entrega completa do desafio: desde a descoberta e seleção 
-              de talentos em todo o Brasil, passando por um processo formativo exclusivo que 
-              aprimora as campanhas das equipes, até a produção final de 3 propostas criativas prontas 
-              para o júri PPA.
-            </p>
-            <p>
-              Inclui toda a operacionalização (plataforma, mentoria, 
-              pitch e imersão presencial), garantindo um processo transparente e de excelência 
-              que conecta a Globo aos melhores talentos de publicidade do país.
+              O investimento garante a entrega completa do desafio, incluindo a operacionalização do processo, com criação do regulamento, customização dos formulários de inscrição, avaliação das submissões, condução das mentorias, organização e condução do pitch com banca avaliadora e mediação da imersão presencial.
             </p>
           </div>
           <div className="investimento-total">
@@ -324,6 +277,9 @@ function PropostaPPAResumo() {
                   <li key={i}>{entregavel}</li>
                 ))}
               </ul>
+              {item.nota && (
+                <p className="detalhamento-nota-imersao">{item.nota}</p>
+              )}
             </div>
           ))}
         </div>
@@ -351,20 +307,7 @@ function PropostaPPAResumo() {
         </div>
       </section>
 
-      <section className="diferenciais-section">
-        <h2 className="section-title">Diferenciais da Mastertech</h2>
-        <div className="diferenciais-grid">
-          {diferenciais.map((diferencial, index) => (
-            <div key={index} className="diferencial-card">
-              <div className="diferencial-icone-wrapper">
-                {diferencial.icone}
-              </div>
-              <h3>{diferencial.titulo}</h3>
-              <p>{diferencial.descricao}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <DiferenciaisSection />
 
       <section className="proximos-passos-section">
         <div className="proximos-passos-card">

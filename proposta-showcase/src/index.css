@@ -75,6 +75,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Evita scroll horizontal no mobile (não altera desktop) */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -82,6 +82,12 @@
   font-size: 1rem;
 }
 
+@media (max-width: 1024px) {
+  .propostas-container {
+    padding: 2rem 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .propostas-container {
     padding: 2rem 1rem;
