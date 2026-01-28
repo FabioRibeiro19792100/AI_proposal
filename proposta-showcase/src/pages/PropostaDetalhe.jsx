@@ -197,6 +197,8 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
   let waitingForEntregaveisList = false
   let waitingForMastertechList = false
   let isMastertechList = false
+  let inBlackBox = false
+  let blackBoxContent = []
 
   // Função auxiliar para finalizar e renderizar lista
   const finalizeList = (key) => {
@@ -213,6 +215,70 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
 
   content.forEach((line, index) => {
     const fullIndex = `${keyPrefix}-${index}`
+    
+    // Debug: verifica se a linha contém a tag
+    if (line.includes('NOTA-DESTAQUE-PRETA')) {
+      console.log('🔴 ENCONTROU TAG DE NOTA na linha', index, ':', line)
+    }
+    
+    // Detecta início de box preto (nova sintaxe)
+    if (line.trim() === '[NOTA-DESTAQUE-PRETA]') {
+      console.log('🔴 DETECTOU INÍCIO DA NOTA na linha', index, line)
+      inBlackBox = true
+      blackBoxContent = []
+      return
+    }
+    
+    // Detecta fim de box preto (nova sintaxe)
+    if (inBlackBox && line.trim() === '[/NOTA-DESTAQUE-PRETA]') {
+      console.log('🔴 DETECTOU FIM DA NOTA. Conteúdo coletado:', blackBoxContent)
+      
+      // Processa o conteúdo - mantém o título se estiver lá
+      const allContent = [...blackBoxContent]
+      let title = '📌 Nota Importante sobre Submissões Individuais:'
+      let paragraphs = []
+      
+      allContent.forEach(l => {
+        const trimmed = l.trim()
+        if (trimmed.startsWith('**📌') || trimmed.startsWith('📌')) {
+          // É o título, já temos
+        } else if (trimmed === '') {
+          // Linha vazia, ignora
+        } else {
+          paragraphs.push(trimmed)
+        }
+      })
+      
+      console.log('🔴 Renderizando box com', paragraphs.length, 'parágrafos')
+      
+      elements.push(
+        <div key={`blackbox-${fullIndex}`} style={{
+          backgroundColor: '#000000',
+          color: '#ffffff',
+          padding: '1.5rem',
+          margin: '2rem 0',
+          borderRadius: '4px'
+        }}>
+          <p style={{ margin: '0 0 1rem 0', fontWeight: 'bold', fontSize: '1.1rem' }}>
+            {title}
+          </p>
+          {paragraphs.map((paragraph, pIdx) => (
+            <p key={pIdx} style={{ margin: pIdx < paragraphs.length - 1 ? '0 0 1rem 0' : '0' }}>
+              {formatInlineMarkdown(paragraph)}
+            </p>
+          ))}
+        </div>
+      )
+      inBlackBox = false
+      blackBoxContent = []
+      return
+    }
+    
+    // Coleta conteúdo do box preto
+    if (inBlackBox) {
+      blackBoxContent.push(line)
+      return
+    }
     
     // Detecta "**Atividades da Mastertech:**" ou similar
     const isMastertechHeader = (line.trim().startsWith('**') && line.trim().endsWith('**') && 
@@ -489,7 +555,59 @@ function renderSectionContent(content, keyPrefix, isEntregaveisSection = false) 
       if (inList) {
         finalizeList(`list-${fullIndex}`)
       }
-      elements.push(<h4 key={fullIndex}>{line.substring(5)}</h4>)
+      const h4Text = line.substring(5)
+      elements.push(<h4 key={fullIndex}>{h4Text}</h4>)
+      
+      // Se for "FASE 1: Submissão de Propostas", adiciona a nota logo depois
+      if (h4Text.includes('FASE 1') && h4Text.includes('Submissão')) {
+        // Procura pela tag de nota nas próximas linhas
+        let foundNota = false
+        let notaStartIdx = -1
+        for (let i = index + 1; i < Math.min(index + 20, content.length); i++) {
+          if (content[i].trim() === '[NOTA-DESTAQUE-PRETA]') {
+            foundNota = true
+            notaStartIdx = i + 1
+            break
+          }
+        }
+        
+        if (foundNota && notaStartIdx > 0) {
+          // Coleta o conteúdo da nota até encontrar o fechamento
+          let notaContent = []
+          for (let i = notaStartIdx; i < content.length; i++) {
+            if (content[i].trim() === '[/NOTA-DESTAQUE-PRETA]') {
+              break
+            }
+            notaContent.push(content[i])
+          }
+          
+          const paragraphs = notaContent
+            .filter(l => l.trim() !== '' && !l.trim().startsWith('**📌'))
+            .map(l => l.trim())
+            .filter(p => p)
+          
+          if (paragraphs.length > 0) {
+            elements.push(
+              <div key={`nota-fase1-${fullIndex}`} style={{
+                backgroundColor: '#000000',
+                color: '#ffffff',
+                padding: '1.5rem',
+                margin: '2rem 0',
+                borderRadius: '4px'
+              }}>
+                <p style={{ margin: '0 0 1rem 0', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                  📌 Nota Importante sobre Submissões Individuais:
+                </p>
+                {paragraphs.map((paragraph, pIdx) => (
+                  <p key={pIdx} style={{ margin: pIdx < paragraphs.length - 1 ? '0 0 1rem 0' : '0' }}>
+                    {formatInlineMarkdown(paragraph)}
+                  </p>
+                ))}
+              </div>
+            )
+          }
+        }
+      }
     } else if (line.trim() === '---') {
       // Finaliza entregáveis ANTES de renderizar a linha separadora
       if (inEntregaveisList && entregaveisItems.length > 0) {
@@ -730,7 +848,6 @@ function renderInvestmentSection(content) {
         valor: 'R$ 65.000,00',
         entregaveis: [
           'Mediação e condução técnica durante a imersão',
-          '3 propostas criativas finalizadas',
           'Documentação completa do processo',
           'Relatório final com métricas'
         ]
@@ -774,6 +891,7 @@ function renderInvestmentSection(content) {
         <div className="investimento-total">
           <span>Total</span>
           <strong>{investimento.total}</strong>
+          <span className="investimento-sem-mentorias">sem considerar as mentorias: R$ 108.500,00</span>
         </div>
       </div>
 

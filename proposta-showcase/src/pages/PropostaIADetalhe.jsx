@@ -408,6 +408,23 @@ function PropostaIADetalhe() {
     <div className="proposta-ia-page">
       {/* Storytelling Horizontal */}
       <section className={`storytelling-section ${currentSlide < 8 ? 'locked' : 'unlocked'} ${currentSlide === 8 ? 'unlocking' : ''}`}>
+        {/* Botão Skip - aparece apenas durante os slides do conceito */}
+        {currentSlide < 8 && (
+          <button 
+            className="skip-concept-button"
+            onClick={() => {
+              setCurrentSlide(8)
+              setHasSeenConcept(true)
+              if (typeof window !== 'undefined') {
+                localStorage.setItem('hasSeenConcept', 'true')
+              }
+            }}
+            aria-label="Pular conceito e ir direto para o conteúdo"
+          >
+            Pular conceito →
+          </button>
+        )}
+        
         <div className="storytelling-container">
           {/* Setas de navegação elegantes */}
           {currentSlide > 0 && currentSlide < 7 && (
@@ -478,7 +495,7 @@ function PropostaIADetalhe() {
                 >
                   {currentSlide === 1 ? (
                     <iframe 
-                      src="https://www.youtube.com/embed/Js7npBSwvd8?rel=0" 
+                      src="https://www.youtube.com/embed/Js7npBSwvd8?rel=0&start=1.5" 
                       style={{ 
                         position: 'absolute', 
                         top: 0, 
@@ -584,7 +601,7 @@ function PropostaIADetalhe() {
                       <span className="contexto-tag">personagens</span>
                       <strong className="contexto-titulo">Quem está em cena agora</strong>
                     </div>
-                    <p className="contexto-texto">Hoje, o processo criativo envolve novos agentes. Pessoas, inteligências artificiais e sistemas que participam da criação, da mediação e da ampliação das narrativas.</p>
+                    <p className="contexto-texto">Hoje, o processo criativo envolve agentes. Agentes de inteligência artificial, capazes de agir de forma autônoma, e agentes humanos, como os estudantes, que podem participar da criação e da transformação de novas ideias.</p>
                   </div>
                   <div className="contexto-item">
                     <div className="contexto-header">
@@ -1302,6 +1319,7 @@ function PropostaIADetalhe() {
               <p className="phase-description">
                 Participantes escolhem uma categoria e submetem proposta escrita + vídeo pitch.<br />A avaliação utiliza critérios claros para classificar riscos e viabilidade.<br />Top 30 selecionados (6 por categoria).
               </p>
+              
               <div className="phase-deliverables">
                 <h4>Entregas Principais:</h4>
                 <ul>
@@ -1310,6 +1328,32 @@ function PropostaIADetalhe() {
                   <li>Relatório de distribuição por categoria</li>
                   <li>Lista de 30 finalistas</li>
                 </ul>
+              </div>
+              
+              <div style={{
+                backgroundColor: '#2a2a2a',
+                color: '#ffffff',
+                padding: '1.25rem',
+                margin: '2rem 0',
+                borderRadius: '2px',
+                fontSize: '0.875rem',
+                lineHeight: '1.5'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                  </svg>
+                  <p style={{ margin: '0', fontWeight: '500', fontSize: '0.875rem' }}>
+                    Nota Importante sobre Submissões Individuais:
+                  </p>
+                </div>
+                <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.875rem', paddingLeft: '1.75rem' }}>
+                  Durante o desenho da mecânica, consideramos a possibilidade de permitir submissões em grupo ou juntar pessoas em equipes. No entanto, como o desafio tem como objetivo central <strong>descobrir e identificar talentos individuais</strong> para potenciais oportunidades de contratação (estágio/júnior), optamos por manter as submissões individuais.
+                </p>
+                <p style={{ margin: '0', fontSize: '0.875rem', paddingLeft: '1.75rem' }}>
+                  A razão principal: em submissões em grupo, seria difícil identificar dentro de uma equipe quem de fato é o talento responsável pela ideia, desenvolvimento técnico e execução. Além disso, permitir grupos poderia gerar expectativas que não poderiam ser cumpridas. O processo individual permite uma avaliação mais precisa das competências, criatividade e potencial de cada participante, alinhado ao objetivo estratégico de descoberta de talentos.
+                </p>
               </div>
             </div>
 
@@ -1498,7 +1542,7 @@ function PropostaIADetalhe() {
             {fullscreenContent === 'video' && (
               <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, width: '100%', maxWidth: '90vw' }}>
                 <iframe 
-                  src="https://www.youtube.com/embed/Js7npBSwvd8?rel=0&autoplay=1" 
+                  src="https://www.youtube.com/embed/Js7npBSwvd8?rel=0&autoplay=1&start=1.5" 
                   style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen

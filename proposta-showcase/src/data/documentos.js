@@ -720,25 +720,6 @@ A Academia LED ocorre em duas edições anuais, uma em São Paulo–Rio e outra 
 
 ---
 
-## Investimento para o Pacote
-
-| Programa / Item | Frequência Anual | Valor | Observações |
-|-----------------|------------------|------|-------------|
-| **Desafio LED** | 1 edição | R$ 348.000 | Mesmo valor da base contratual atual, apenas acrescido de inflação (estimada em 4,5%) |
-| **Pós-LED** | 1 edição | R$ 28.000 | Segunda versão de orçamento (antes era R$ 78.000) |
-| **Academia LED de Jornalismo** | 2 edições | R$ 87.500 | Valor para duas edições anuais, conforme bases já negociadas em 2025 e acrescida de inflação (estimada em 4,5%) |
-| **Total 2026** | — | **R$ 463.500** | — |
-
-**Para 2027**, este total anual seria atualizado pelo IPCA vigente no período.
-
----
-
-## Forma de Pagamento
-
-Os pagamentos seguirão os fluxos já praticados pela Globo em contratações anteriores com a Mastertech, respeitando os trâmites administrativos da empresa.
-
----
-
 ## Próximos Passos
 
 - Validação do escopo do Pós-LED, para confirmar se atende plenamente ao objetivo de apoiar os vencedores na organização do lançamento de seus produtos
@@ -1138,7 +1119,6 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 | Finalização e entrega | 2 dias |
 
 **Entregáveis:**
-- 3 propostas criativas finalizadas e prontas para avaliação do júri PPA
 - Documentação completa do processo de imersão
 - Relatório final com métricas e aprendizados
 
@@ -1152,7 +1132,7 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 | **Fase 2: Seleção Inicial** | 3 semanas | Maio 2026 | 10 equipes selecionadas |
 | **Fase 3: Mentoria** | 4 semanas | Maio-Junho 2026 | Campanhas aprimoradas |
 | **Fase 4: Pitch** | 2 semanas | Junho 2026 | 3 equipes finalistas |
-| **Fase 5: Encontros + Imersão** | 6 semanas | Julho-Setembro 2026 | 3 propostas criativas finalizadas |
+| **Fase 5: Encontros + Imersão** | 6 semanas | Julho-Setembro 2026 | Documentação completa do processo |
 | **Total** | **21 semanas** | **Abril a Setembro 2026** | — |
 
 **Observação:** O cronograma está alinhado ao "Tempos & Movimentos" do briefing PPA, considerando que a avaliação do júri (ponto 7) ocorre em outubro e a exibição no PPA (ponto 8) em novembro.
@@ -1194,50 +1174,6 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 
 ---
 
-## Investimento e Precificação
-
-### DETALHAMENTO DAS ENTREGAS:
-
-**Fases 1, 2 e 4 (R$ 43.500,00):**
-- Plataforma de inscrições funcional e responsiva
-- Base de dados completa de inscrições validadas
-- Processo de avaliação documentado
-- Seleção das 10 equipes
-- Pitch e seleção das 3 finalistas
-
-**Fase 3 - Mentoria (R$ 21.000,00):**
-- 10 campanhas aprimoradas e documentadas
-- Roteiros revisados e otimizados
-- Equipes preparadas para o pitch
-
-**Fase 5 - Imersão (R$ 65.000,00):**
-- Mediação e condução técnica durante a imersão
-- 3 propostas criativas finalizadas
-- Documentação completa do processo
-- Relatório final com métricas
-
-**Infraestrutura:**
-- Microsoft Forms ou Typeform
-- Sistemas de análise de submissões
-- Plataforma de gestão
-
-**Total: R$ 129.500,00**
-
-### Forma de Pagamento
-
-- **30%** na assinatura do contrato (início Fase 1)
-- **30%** no início da Fase 3 (Mentoria)
-- **25%** no início da Fase 5 (Encontros + Imersão)
-- **15%** na entrega final (3 propostas criativas finalizadas)
-
-### Observações
-
-- Valores incluem impostos e taxas
-- Custos de deslocamento e hospedagem para a imersão presencial serão tratados separadamente conforme necessidade
-- Valores podem ser ajustados conforme escopo final definido com a Globo
-
----
-
 ## Diferenciais da Mastertech
 
 ### Experiência Comprovada
@@ -1259,6 +1195,49 @@ A Mastertech operacionaliza os seguintes pontos da mecânica:
 - Respeito à diversidade e inclusão
 - Foco em resultados de qualidade
 - Valorização da educação e formação
+
+---
+
+## Investimento e Precificação
+
+### DETALHAMENTO DAS ENTREGAS:
+
+**Fases 1, 2 e 4 (R$ 43.500,00):**
+- Plataforma de inscrições funcional e responsiva
+- Base de dados completa de inscrições validadas
+- Processo de avaliação documentado
+- Seleção das 10 equipes
+- Pitch e seleção das 3 finalistas
+
+**Fase 3 - Mentoria (R$ 21.000,00):**
+- 10 campanhas aprimoradas e documentadas
+- Roteiros revisados e otimizados
+- Equipes preparadas para o pitch
+
+**Fase 5 - Imersão (R$ 65.000,00):**
+- Mediação e condução técnica durante a imersão
+- Documentação completa do processo
+- Relatório final com métricas
+
+**Infraestrutura:**
+- Microsoft Forms ou Typeform
+- Sistemas de análise de submissões
+- Plataforma de gestão
+
+**Total: R$ 129.500,00**
+
+### Forma de Pagamento
+
+- **30%** na assinatura do contrato (início Fase 1)
+- **30%** no início da Fase 3 (Mentoria)
+- **25%** no início da Fase 5 (Encontros + Imersão)
+- **15%** na entrega final
+
+### Observações
+
+- Valores incluem impostos e taxas
+- Custos de deslocamento e hospedagem para a imersão presencial serão tratados separadamente conforme necessidade
+- Valores podem ser ajustados conforme escopo final definido com a Globo
 
 ---
 
@@ -1446,6 +1425,14 @@ Esta seção apresenta as **perguntas estratégicas, hipóteses de abordagem, te
 - Framework de auto-avaliação tipo Netflix
 - Período de 4 semanas para submissões
 - Período de 2 semanas para avaliação
+
+[NOTA-DESTAQUE-PRETA]
+**📌 Nota Importante sobre Submissões Individuais:**
+
+Durante o desenho da mecânica, consideramos a possibilidade de permitir submissões em grupo ou juntar pessoas em equipes. No entanto, como o desafio tem como objetivo central **descobrir e identificar talentos individuais** para potenciais oportunidades de contratação (estágio/júnior), optamos por manter as submissões individuais.
+
+A razão principal: em submissões em grupo, seria difícil identificar dentro de uma equipe quem de fato é o talento responsável pela ideia, desenvolvimento técnico e execução. Além disso, permitir grupos poderia gerar expectativas que não poderiam ser cumpridas. O processo individual permite uma avaliação mais precisa das competências, criatividade e potencial de cada participante, alinhado ao objetivo estratégico de descoberta de talentos.
+[/NOTA-DESTAQUE-PRETA]
 
 **Critérios de Avaliação (Fase 1):**
 - Relevância para a categoria (30%)
@@ -1761,7 +1748,7 @@ O regulamento formal será desenvolvido na Fase 0, mas esta proposta já conside
 
 ---
 
-## 14. Próximos Passos
+## 12. RISCOS E MITIGAÇÕES
 
 ### 14.1 Aprovação da Proposta
 - Revisão e aprovação pela Globo

@@ -72,7 +72,7 @@ const fases = [
       'Desenvolvimento de propostas criativas',
       'Finalização e entrega'
     ],
-    entregavel: '3 propostas criativas finalizadas prontas para avaliação do júri PPA, documentação completa do processo de imersão e relatório final com métricas e aprendizados'
+    entregavel: 'Documentação completa do processo de imersão e relatório final com métricas e aprendizados'
   }
 ]
 
@@ -104,7 +104,6 @@ const investimento = {
       valor: 'R$ 65.000,00',
       entregaveis: [
         'Mediação e condução técnica durante a imersão',
-        '3 propostas criativas finalizadas',
         'Documentação completa do processo',
         'Relatório final com métricas'
       ]
@@ -294,6 +293,7 @@ function PropostaPPAResumo() {
           <div className="investimento-total">
             <span>Total</span>
             <strong>{investimento.total}</strong>
+            <span className="investimento-sem-mentorias">sem considerar as mentorias: R$ 108.500,00</span>
           </div>
         </div>
 
